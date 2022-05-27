@@ -1,4 +1,5 @@
 
+using ITEC.Backend.Application.Options;
 using ITEC.Backend.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddPersistence(builder.Configuration.GetConnectionString("itec2022"));
+builder.Services.Configure<JwtOptions>(
+        builder.Configuration.GetSection(nameof(JwtOptions)));
 
 var app = builder.Build();
 
