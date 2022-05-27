@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useContext } from "react";
-import axios from "../api/axios";
 import useAuth from "./hooks/useAuth";
 import "./authentication.css";
+import axios from "./api/axios";
 
 const LOGIN_URL = "/auth";
 
