@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+.form {
+  padding: 10%;
+  margin: 0% 10% 10% 10%;
+  .registerForm {
+    font-family: "Nunito", sans-serif;
+    font-size: 22px;
+    color: #fff;
+    border-radius: 5%;
+    .errmsg {
+      background-color: lightpink;
+      color: firebrick;
+      font-weight: bold;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .offscreen {
+      position: absolute;
+      left: -9999px;
+    }
+    .instructions {
+      font-size: 0.75rem;
+      border-radius: 0.5rem;
+      background: #c4dbf4;
+      color: #3b3030;
+      padding: 0.25rem;
+      margin-top: 0.25rem;
+    }
+    .formField {
+      display: flex;
+      flex-direction: column;
+      label {
+        display: flex;
+        align-items: center;
+        color: rgb(223 234 246);
+      }
+      .instructions > svg {
+        margin-right: 0.25rem;
+      }
+      .hide {
+        display: none;
+      }
+      .valid {
+        color: limegreen;
+        margin-left: 0.25rem;
+      }
+      .invalid {
+        color: red;
+        margin-left: 0.25rem;
+      }
+      a,
+      a:visited {
+        color: #fff;
+      }
+      input[type="text"],
+      input[type="password"],
+      .submitFormButton,
+      textarea,
+      button {
+        font-family: "Nunito", sans-serif;
+        font-size: 22px;
+        padding: 0.25rem;
+        border-radius: 0.5rem;
+        outline-color: #003973;
+      }
+    }
+    h1 {
+      color: rgb(223 234 246);
+      align-items: center;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+  section {
+    width: 100%;
+    //   max-width: 420px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    background-color: rgba(0, 59, 117, 0.57);
+  }
+.btn{
+    display: flex;
+    justify-content: flex-end;
+ .submitFormButton {
+    padding: 0.5rem 0.5rem !important;
+    border-radius: 0.5rem;
+    background: #c4dbf4;
+    width: 50%;
+    font-size: 22px;
+    margin-top: 10px;
+}
+ ;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+  }
+  .already {
+    justify-content: center;
+    .line {
+      display: inline-block;
+      padding-left: 30%;
+      a {
+        color: lightblue;
+      }
+    }
+  }
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem 0.5rem;
+}
+
+/* Google authentication style */
+.g-button {
+  border: 1px solid rgb(66, 133, 244);
+  background: rgb(66, 133, 244);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.g-logo {
+  height: 35px;
+  padding: 8px 10px;
+  background: white;
+}
+
+.g-text {
+  font-size: 16px;
+  padding: 8px 10px;
+  color: white;
+  font-family: roboto;
+  text-align: center;
+}
+
+.g_body {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
