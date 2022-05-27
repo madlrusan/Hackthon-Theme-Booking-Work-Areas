@@ -19,4 +19,9 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ITEC.Backend.Domain\ITEC.Backend.Domain.csproj" />
+    <ProjectReference Include="..\ITEC.Backend.Persistence\ITEC.Backend.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,6 @@
 ﻿using ITEC.Backend.Persistence.Database;
+using ITEC.Backend.Persistence.Repositories;
+using ITEC.Backend.Persistence.Repositories.Abstractions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,8 @@ namespace ITEC.Backend.Persistence
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddScoped<IOfficeRepository, OfficeRepository>();
             return services;
         }
 
