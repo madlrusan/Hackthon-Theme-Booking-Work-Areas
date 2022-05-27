@@ -93,7 +93,7 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         <div className="formField">
           <label htmlFor="username">
-            Username:
+            Username
             <FontAwesomeIcon
               icon={faCheck}
               className={validName ? "valid" : "hide"}
