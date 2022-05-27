@@ -4,6 +4,7 @@ using ITEC.Backend.Persistence.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITEC.Backend.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220527192102_desk")]
+    partial class desk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,9 +43,7 @@ namespace ITEC.Backend.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("IsHotelingDesk")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<float>("LocationX")
                         .HasColumnType("real");
@@ -67,39 +67,6 @@ namespace ITEC.Backend.Persistence.Migrations
                     b.HasIndex("FloorId");
 
                     b.ToTable("Desks");
-                });
-
-            modelBuilder.Entity("ITEC.Backend.Domain.Models.DeskReservation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAtTimeUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedByUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("DeskId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ReservationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("UpdatedAtTimeUtc")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedByUserId");
-
-                    b.HasIndex("DeskId");
-
-                    b.ToTable("DeskReservation");
                 });
 
             modelBuilder.Entity("ITEC.Backend.Domain.Models.Floor", b =>
@@ -427,25 +394,6 @@ namespace ITEC.Backend.Persistence.Migrations
                     b.Navigation("Floor");
                 });
 
-            modelBuilder.Entity("ITEC.Backend.Domain.Models.DeskReservation", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "CreatedByUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ITEC.Backend.Domain.Models.Desk", "Desk")
-                        .WithMany("Reservations")
-                        .HasForeignKey("DeskId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("CreatedByUser");
-
-                    b.Navigation("Desk");
-                });
-
             modelBuilder.Entity("ITEC.Backend.Domain.Models.Floor", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "CreatedByUser")
@@ -544,11 +492,6 @@ namespace ITEC.Backend.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ITEC.Backend.Domain.Models.Desk", b =>
-                {
-                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("ITEC.Backend.Domain.Models.Floor", b =>
