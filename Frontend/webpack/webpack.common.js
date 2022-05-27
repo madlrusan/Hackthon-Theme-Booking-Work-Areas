@@ -1,11 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: path.resolve(__dirname, "..", "./src/index.tsx"),
   resolve: {
-    extensions: [".tsx", ".ts", ".js", "scss"],
+    extensions: [".tsx", ".ts", ".js"],
   },
   module: {
     rules: [
@@ -19,37 +18,8 @@ module.exports = {
         ],
       },
       {
-        test: /\.module\.s(a|c)ss$/,
-        loader: [
-          isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader",
-            options: {
-              modules: true,
-              sourceMap: isDevelopment,
-            },
-          },
-          {
-            loader: "sass-loader",
-            options: {
-              sourceMap: isDevelopment,
-            },
-          },
-        ],
-      },
-      {
-        test: /\.s(a|c)ss$/,
-        exclude: /\.module.(s(a|c)ss)$/,
-        loader: [
-          isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
-          "css-loader",
-          {
-            loader: "sass-loader",
-            options: {
-              sourceMap: isDevelopment,
-            },
-          },
-        ],
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
@@ -68,10 +38,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "..", "./src/index.html"),
-    }),
-    new MiniCssExtractPlugin({
-      filename: isDevelopment ? "[name].css" : "[name].[hash].css",
-      chunkFilename: isDevelopment ? "[id].css" : "[id].[hash].css",
     }),
   ],
   stats: "errors-only",
