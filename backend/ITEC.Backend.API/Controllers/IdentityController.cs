@@ -1,4 +1,5 @@
 ﻿using ITEC.Backend.Application.Commands;
+using ITEC.Backend.Application.Commands.UserSignInCmd;
 using ITEC.Backend.Application.Options;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -22,8 +23,15 @@ namespace ITEC.Backend.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterCommand cmd)
+        {
+            var result = await _mediator.Send(cmd);
+            return Ok(result);
+        }
+
+        [HttpPost("signin")]
+        public async Task<IActionResult> SignIn(UserSignInCommand cmd)
         {
             var result = await _mediator.Send(cmd);
             return Ok(result);

@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITEC.Backend.Application.Commands.UserRegisterCmd
+namespace ITEC.Backend.Application.Commands.UserSignInCmd
 {
-    public class UserRegisterCommandValidator : AbstractValidator<UserRegisterCommand>
+    public class UserSignInCommandValidator : AbstractValidator<UserSignInCommand>
     {
-        public UserRegisterCommandValidator()
+        public UserSignInCommandValidator()
         {
             RuleFor(o => o.Email)
                 .NotEmpty().NotNull()
