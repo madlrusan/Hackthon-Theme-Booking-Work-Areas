@@ -7,8 +7,8 @@
   font-family: "Nunito", sans-serif;
 }
 .form {
-  padding: 10%;
-  margin: 0% 10% 10% 10%;
+    padding: 10% 25%;
+    margin: 0% -25% 10% 10%;
   .registerForm {
     font-family: "Nunito", sans-serif;
     font-size: 22px;
@@ -79,8 +79,8 @@
     }
   }
   section {
-    width: 100%;
-    //   max-width: 420px;
+    width: 50%;
+    max-width: 50rem;
     min-height: 400px;
     display: flex;
     flex-direction: column;
@@ -112,7 +112,6 @@
     justify-content: center;
     .line {
       display: inline-block;
-      padding-left: 30%;
       a {
         color: lightblue;
       }
