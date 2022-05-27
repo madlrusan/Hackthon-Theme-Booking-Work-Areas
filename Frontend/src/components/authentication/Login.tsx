@@ -1,9 +1,8 @@
 import { useRef, useState, useEffect, useContext } from "react";
-import useAuth from "./hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import "./authentication.css";
-import axios from "./api/axios";
-
-const LOGIN_URL = "/auth";
+import axios from "../../api/axios";
+import { ApiUrls } from "../constants/ApiUrls";
 
 export const Login = () => {
   const { setAuth } = useAuth();
@@ -34,7 +33,7 @@ export const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        LOGIN_URL,
+        ApiUrls.LOGIN,
         JSON.stringify({ user, pwd }),
         {
           headers: { "Content-Type": "application/json" },
