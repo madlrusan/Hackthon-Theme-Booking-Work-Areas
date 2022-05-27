@@ -202,12 +202,14 @@ const Register = () => {
               Must match the password field.
             </p>
           </div>
-          <button
-            className="submitFormButton"
-            disabled={!validName || !validPwd || !validMatch}
-          >
-            Sign up
-          </button>
+          <div className="btn">
+            <button
+              className="submitFormButton"
+              disabled={!validName || !validPwd || !validMatch}
+            >
+              Sign up
+            </button>
+          </div>
         </form>
         <p className="already">
           Already registered?

@@ -82,6 +82,8 @@ export const Login = () => {
               value={user}
               required
             />
+          </div>
+          <div className="formField">
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -90,6 +92,8 @@ export const Login = () => {
               value={pwd}
               required
             />
+          </div>
+          <div className="btn">
             <button className="submitFormButton" disabled={isValid}>
               Sign In
             </button>

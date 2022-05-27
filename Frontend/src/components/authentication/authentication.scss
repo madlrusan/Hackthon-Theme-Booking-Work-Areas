@@ -28,8 +28,8 @@
     .instructions {
       font-size: 0.75rem;
       border-radius: 0.5rem;
-      background: #000;
-      color: #fff;
+      background: #c4dbf4;
+      color: #3b3030;
       padding: 0.25rem;
       margin-top: 0.25rem;
     }
@@ -68,12 +68,14 @@
         font-size: 22px;
         padding: 0.25rem;
         border-radius: 0.5rem;
+        outline-color: #003973;
       }
     }
     h1 {
       color: rgb(223 234 246);
       align-items: center;
-      margin: 0px 42%;
+      display: flex;
+      justify-content: flex-end;
     }
   }
   section {
@@ -86,13 +88,18 @@
     padding: 1rem;
     background-color: rgba(0, 59, 117, 0.57);
   }
-
-  .submitFormButton {
-    margin: 1rem 12rem;
-    padding: 0.5rem 0.5rem;
+.btn{
+    display: flex;
+    justify-content: flex-end;
+ .submitFormButton {
+    padding: 0.5rem 0.5rem !important;
     border-radius: 0.5rem;
     background: #c4dbf4;
     width: 50%;
+    font-size: 22px;
+    margin-top: 10px;
+}
+ ;
   }
   form {
     display: flex;
@@ -103,8 +110,6 @@
   }
   .already {
     justify-content: center;
-    margin: 1rem 18rem;
-    width: 200px;
     .line {
       display: inline-block;
       padding-left: 30%;
