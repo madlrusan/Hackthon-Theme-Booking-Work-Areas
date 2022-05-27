@@ -1,4 +1,5 @@
 
+using ITEC.Backend.API.Middlewares;
 using ITEC.Backend.Application;
 using ITEC.Backend.Application.Options;
 using ITEC.Backend.Persistence;
@@ -55,8 +56,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 //}notunihack123!
 
 app.UseHttpsRedirection();
@@ -66,6 +67,8 @@ app.UseCors();
 app.AddApplicationMiddlewares();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.MapControllers();
 

@@ -1,4 +1,5 @@
 ﻿using ITEC.Backend.Application.Options;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +17,7 @@ namespace ITEC.Backend.Application
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, JwtOptions jwtOptions)
         {
+            services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -1,5 +1,6 @@
 ﻿using ITEC.Backend.Application.Commands;
 using ITEC.Backend.Application.Options;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -14,53 +15,18 @@ namespace ITEC.Backend.API.Controllers
     [Route("api/identity")]
     public class IdentityController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly JwtOptions _jwtOptions;
+        private readonly IMediator _mediator;
 
-        public IdentityController(UserManager<IdentityUser> userManager, IOptions<JwtOptions> jwtOptions)
+        public IdentityController(IMediator mediator)
         {
-            _userManager = userManager;
-            _jwtOptions = jwtOptions.Value;
+            _mediator = mediator;
         }
-        
+
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterCmd cmd)
+        public async Task<IActionResult> Register(UserRegisterCommand cmd)
         {
-            var user = await _userManager.FindByEmailAsync(cmd.Email);
-
-            if (user != null)
-                return BadRequest("User already exist!");
-
-            var newUser = new IdentityUser
-            {
-                Email = cmd.Email,
-                UserName = cmd.Email,
-            };
-
-            var result = await _userManager.CreateAsync(newUser, cmd.Password);
-
-            if (result.Succeeded)
-            {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new Claim[]
-                    {
-                    new Claim(JwtRegisteredClaimNames.Sub, newUser.Id),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email, newUser.Email)
-                    }),
-                    Expires = DateTime.UtcNow.AddDays(60),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-                        SecurityAlgorithms.HmacSha256Signature)
-                };
-
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                return Ok(tokenHandler.WriteToken(token));
-            }
-
-            return BadRequest(result.Errors);
+            var result = await _mediator.Send(cmd);
+            return Ok(result);
         }
     }
 }
