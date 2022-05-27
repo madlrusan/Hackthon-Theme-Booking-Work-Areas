@@ -6,11 +6,13 @@ import { AuthProvider } from "./context/AuthProvider";
 import "./styles.css";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <AuthProvider>
+  <>
+    <BrowserRouter>
+      <AuthProvider>
         <Header />
-      <App />
-    </AuthProvider>
-  </BrowserRouter>,
+        <App />
+      </AuthProvider>
+    </BrowserRouter>
+  </>,
   document.getElementById("root")
 );
