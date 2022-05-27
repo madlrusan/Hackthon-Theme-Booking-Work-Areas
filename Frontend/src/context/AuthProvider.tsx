@@ -4,20 +4,20 @@ interface AuthProviderProps {
   children: any;
 }
 type AuthContextType = {
-  auth: any;
-  setAuth: any;
+  isAuthenticated: boolean;
+  setIsAuthenticated: any;
 };
 const init: AuthContextType = {
-  auth: {},
-  setAuth: () => {},
+  isAuthenticated: false,
+  setIsAuthenticated: () => {},
 };
 export const AuthContext = createContext<AuthContextType>(init);
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  const [auth, setAuth] = useState({});
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const ctx: AuthContextType = {
-    auth: auth,
-    setAuth: setAuth,
+    isAuthenticated: isAuthenticated,
+    setIsAuthenticated: setIsAuthenticated,
   };
   return <AuthContext.Provider value={ctx}>{children}</AuthContext.Provider>;
 };

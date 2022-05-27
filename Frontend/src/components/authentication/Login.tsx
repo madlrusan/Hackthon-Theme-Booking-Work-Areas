@@ -5,7 +5,7 @@ import axios from "../../api/axios";
 import { ApiUrls } from "../constants/ApiUrls";
 
 export const Login = () => {
-  const { setAuth } = useAuth();
+  const { setIsAuthenticated } = useAuth();
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
   const [user, setUser] = useState("");
@@ -41,7 +41,7 @@ export const Login = () => {
         }
       );
       const accessToken = response?.data?.accessToken;
-      setAuth({ user, pwd, accessToken });
+      setIsAuthenticated({ user, pwd, accessToken });
       setUser("");
       setPwd("");
     } catch (err: any) {
