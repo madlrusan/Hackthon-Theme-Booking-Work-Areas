@@ -3,6 +3,8 @@ import useAuth from "../../hooks/useAuth";
 import "./authentication.css";
 import axios from "../../api/axios";
 import { ApiUrls } from "../constants/ApiUrls";
+import GoogleLogin from "react-google-login";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
   const { setIsAuthenticated } = useAuth();
@@ -28,7 +30,12 @@ export const Login = () => {
   useEffect(() => {
     setErrMsg("");
   }, [user, pwd]);
-
+  const onSuccess = (res: any) => {
+    console.log("Login success:", res);
+  };
+  const onFailure = (res: any) => {
+    console.log("Login failure:", res);
+  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -89,19 +96,11 @@ export const Login = () => {
       <p>
         Need an Account? <br />
         <span className="line">
-          <a href="">Sign Up</a>
+          <Link to="/register" replace>
+            Sign Up
+          </Link>
         </span>
       </p>
-      <div className="g_body">
-        <button className="g-button" onClick={console.log}>
-          <img
-            className="g-logo"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/157px-Google_%22G%22_Logo.svg.png"
-            alt="Google Logo"
-          />
-          <p className="g-text">Sign in with Google</p>
-        </button>
-      </div>
     </section>
   );
 };
