@@ -1,15 +1,18 @@
 // Navigation Variables
 $content-width: 1000px;
 $breakpoint: 799px;
-$nav-height: 70px;
+$nav-height: 40px;
 $nav-background: #ffffff;
-$nav-font-color: #0e497a;
-$link-hover-color: #3a93ed;
+$nav-font-color: #003973;
+$link-hover-color: #dfeaf6;
 
 // Outer navigation wrapper
 .navigation {
   height: $nav-height;
   background: $nav-background;
+  min-height: 25%;
+  max-width: 100%;
+  padding: 2%;
 }
 
 // Logo and branding
@@ -17,9 +20,10 @@ $link-hover-color: #3a93ed;
   position: absolute;
   padding-left: 20px;
   float: left;
-  line-height: $nav-height;
+  line-height: 60px;
   text-transform: uppercase;
   font-size: 1.4em;
+  top: 0px;
   a,
   a:visited {
     color: $nav-font-color;
@@ -29,8 +33,9 @@ $link-hover-color: #3a93ed;
 
 // Container with no padding for navbar
 .nav-container {
-  max-width: $content-width;
-  margin: 0 auto;
+  //   max-width: $content-width;
+  margin: -20px 250px 0 0;
+  width: 100%;
 }
 
 // Navigation
@@ -54,18 +59,23 @@ nav {
         &:hover {
           background: $link-hover-color;
           color: $nav-font-color;
+          border-radius: 25px;
         }
         &:not(:only-child):after {
           padding-left: 4px;
           content: " ▾";
         }
-      } // Dropdown list
-      ul li {
-        min-width: 190px;
-        a {
-          padding: 15px;
-          line-height: 20px;
+        &.avatar {
+          display: flex;
+          background: none;
         }
+      }
+    } // Dropdown list
+    ul li {
+      min-width: 190px;
+      a {
+        padding: 15px;
+        line-height: 20px;
       }
     }
   }
@@ -119,13 +129,14 @@ nav {
 }
 @media screen and (min-width: $breakpoint) {
   .nav-list {
-    display: block !important;
+    display: flex !important;
+    justify-content: flex-end;
+    top: 0px;
   }
 }
 #nav-toggle {
   position: absolute;
-  left: 18px;
-  top: 22px;
+  top: 20%;
   cursor: pointer;
   padding: 10px 35px 16px 0px;
   span,
