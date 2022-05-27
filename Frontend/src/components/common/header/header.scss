@@ -49,6 +49,7 @@ nav {
       float: left;
       position: relative;
       a,
+      .dropdownButton,
       a:visited {
         display: block;
         padding: 0 20px;
@@ -95,9 +96,8 @@ nav {
 .nav-mobile {
   display: none;
   position: absolute;
-  top: 0;
+  top: 5px;
   right: 0;
-  background: $nav-background;
   height: $nav-height;
   width: $nav-height;
 }

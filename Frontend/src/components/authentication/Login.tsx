@@ -3,7 +3,6 @@ import useAuth from "../../hooks/useAuth";
 import "./authentication.css";
 import axios from "../../api/axios";
 import { ApiUrls } from "../constants/ApiUrls";
-import GoogleLogin from "react-google-login";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
@@ -30,12 +29,6 @@ export const Login = () => {
   useEffect(() => {
     setErrMsg("");
   }, [user, pwd]);
-  const onSuccess = (res: any) => {
-    console.log("Login success:", res);
-  };
-  const onFailure = (res: any) => {
-    console.log("Login failure:", res);
-  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {

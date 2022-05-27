@@ -1,86 +1,135 @@
 import React, { useState } from "react";
-import './header.scss';
-import * as JQuery  from 'jquery'
-import { Avatar } from "@mui/material";
+import "./header.scss";
+
+import { Avatar, Menu, MenuItem, Typography } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import BurgerMenu from "./BurgerMenu";
 
 const officeLocations = [
   "Company Location 1",
   "Company Location 2",
   "Company Location 3",
 ];
-
-const userSettings = ["User Setting 1", "User Setting 2", "User Setting 3"];
-
+const menu = [
+  { name: "Office", subMenu: officeLocations },
+  { name: "Schedule" },
+  { name: "People" },
+  { name: "Maps" },
+  { name: "Manage" },
+];
 export const Header = () => {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
-    const handleOpenNavMenu = (event : any) => {
-        console.log("am deschis");
-      setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event : any) => {
-        console.log("am deschis");
-      setAnchorElUser(event.currentTarget);
-    };
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
 
-    const handleCloseNavMenu = () => {
-        console.log("am inchis");
-      setAnchorElNav(null);
-    };
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
 
-    const handleCloseUserMenu = () => {
-        console.log("am inchis");
-      setAnchorElUser(null);
-    };
+  const handleCloseNavMenu = (id?: number) => {
+    setAnchorElNav(null);
+    if (id !== undefined) navigate(`/location/${id}`);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   return (
     <>
       <section className="navigation">
         <div className="nav-container">
           <div className="brand">
-            <a href="#!">Company Name</a>
+            <Link to="/">Company Name</Link>
           </div>
           <nav>
-            <div className="nav-mobile">
-              <a id="nav-toggle" href="#!">
-                <span></span>
-              </a>
-            </div>
+            {/* <BurgerMenu /> */}
+
             <ul className="nav-list">
               <li>
-                <a href="#!">Office</a>
-                <ul className="nav-dropdown" onClick={(e) => handleOpenNavMenu(e.target)}>
-                    {officeLocations.map((location) => (
-                        <li key={location}>
-                            <a href="#!" onClick={handleCloseNavMenu}>{location}</a>
-                        </li>
-                    ))}
-                </ul>
+                <div
+                  className="dropdownButton"
+                  aria-controls="menu-office"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                >
+                  Office
+                </div>
+
+                <Menu
+                  onMouseLeave={() => handleCloseNavMenu()}
+                  id="menu-office"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={() => handleCloseNavMenu()}
+                  sx={{
+                    display: { xs: "block" },
+                  }}
+                >
+                  {officeLocations.map((page) => (
+                    <MenuItem
+                      key={page}
+                      onClick={(id) => handleCloseNavMenu(5)}
+                    >
+                      <Typography textAlign="center">{page}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
               </li>
               <li>
-                <a href="#!">Schedule</a>
+                <Link to={"Schedule"}>Schedule</Link>
               </li>
               <li>
-                <a href="#!">People</a>
+                <Link to="People">People</Link>
               </li>
               <li>
-                <a href="#!">Maps</a>
+                <Link to="Maps">Maps</Link>
               </li>
               <li>
-                <a href="#!">Manage</a>
+                <Link to="Manage">Manage</Link>
               </li>
               <li className="avatar">
-                <a href="#!" className="avatar">
-                    <Avatar className="img"></Avatar>
-                    
-                </a>
-                <ul className="nav-dropdown" onClick={(e)=>handleOpenUserMenu(e.target)}>
-                        {userSettings.map((setting) => (
-                            <li key={setting}>
-                                <a href="#!" onClick={handleCloseUserMenu}>{setting}</a>
-                            </li>
-                        ))}
+                <div className="avatar dropdownButton">
+                  <Avatar className="img" onClick={handleOpenUserMenu}></Avatar>
+                </div>
+                <ul className="nav-dropdown">
+                  <Menu
+                    sx={{ mt: "45px" }}
+                    id="menu-avatar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">Logout</Typography>
+                    </MenuItem>
+                  </Menu>
                 </ul>
               </li>
             </ul>
