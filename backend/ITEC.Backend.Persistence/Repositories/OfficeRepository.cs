@@ -19,6 +19,12 @@ namespace ITEC.Backend.Persistence.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task AddOffice(Office office)
+        {
+            await _dbContext.Set<Office>().AddAsync(office);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<List<Office>> GetOffices(bool includeFloors)
         {
             var query = _dbContext.Set<Office>().AsNoTracking();

@@ -18,6 +18,7 @@ namespace ITEC.Backend.Application
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, JwtOptions jwtOptions)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddHttpContextAccessor();
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

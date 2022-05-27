@@ -10,5 +10,6 @@ namespace ITEC.Backend.Persistence.Repositories.Abstractions
     public interface IOfficeRepository
     {
         Task<List<Office>> GetOffices(bool includeFloors);
+        Task AddOffice(Office office);
     }
 }
