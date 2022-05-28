@@ -14,6 +14,7 @@ $link-hover-color: #fcfcfc;
   min-height: 25%;
   max-width: 100%;
   padding: 2%;
+
 }
 
 // Logo and branding
@@ -31,12 +32,17 @@ $link-hover-color: #fcfcfc;
     text-decoration: none;
   }
 }
-
+.sticky-container{
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
 // Container with no padding for navbar
 .nav-container {
   //   max-width: $content-width;
   margin: -20px 250px 0 0;
   width: 100%;
+  
 }
 
 // Navigation

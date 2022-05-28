@@ -44,7 +44,7 @@ export const Header = () => {
   };
 
   return (
-    <>
+    <div className="sticky-container">
       <section className="navigation">
         <div className="nav-container">
           <div className="brand">
@@ -137,6 +137,6 @@ export const Header = () => {
         </div>
       </section>
       <script src="./header.js"> </script>
-    </>
+    </div>
   );
 };
