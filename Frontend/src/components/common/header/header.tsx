@@ -1,24 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./header.scss";
 
 import { Avatar, Menu, MenuItem, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import BurgerMenu from "./BurgerMenu";
+import { LocationContext } from "../../../context/LocationProvider";
 
-const officeLocations = [
-  "Company Location 1",
-  "Company Location 2",
-  "Company Location 3",
-];
-const menu = [
-  { name: "Office", subMenu: officeLocations },
-  { name: "Schedule" },
-  { name: "People" },
-  { name: "Maps" },
-  { name: "Manage" },
-];
 export const Header = () => {
   const navigate = useNavigate();
+  const locationContext = useContext(LocationContext);
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -85,14 +75,18 @@ export const Header = () => {
                     display: { xs: "block" },
                   }}
                 >
-                  {officeLocations.map((page) => (
-                    <MenuItem
-                      key={page}
-                      onClick={(id) => handleCloseNavMenu(5)}
-                    >
-                      <Typography textAlign="center">{page}</Typography>
-                    </MenuItem>
-                  ))}
+                  {locationContext.locations.map((location) => {
+                    return (
+                      <MenuItem
+                        key={location.id}
+                        onClick={() => handleCloseNavMenu(location.id)}
+                      >
+                        <Typography textAlign="center">
+                          {location.name}
+                        </Typography>
+                      </MenuItem>
+                    );
+                  })}
                 </Menu>
               </li>
               <li>

@@ -6,6 +6,8 @@ import { Login } from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
 import { Header } from "./components/common/header/header";
 import { AuthProvider } from "./context/AuthProvider";
+import { LocationProvider } from "./context/LocationProvider";
+import { ModalsProvider } from "./context/ModalProvider";
 import "./styles.css";
 
 const root = ReactDOM.createRoot(
@@ -15,7 +17,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <App />
+        <ModalsProvider>
+          <LocationProvider>
+            <App />
+          </LocationProvider>
+        </ModalsProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
