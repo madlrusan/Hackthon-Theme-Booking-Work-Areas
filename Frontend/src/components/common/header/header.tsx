@@ -63,7 +63,7 @@ export const Header = () => {
                   aria-haspopup="true"
                   onClick={handleOpenNavMenu}
                 >
-                  Office
+                  Locations
                 </div>
 
                 <Menu
@@ -96,16 +96,11 @@ export const Header = () => {
                 </Menu>
               </li>
               <li>
-                <Link to={"Schedule"}>Schedule</Link>
+                <Link to={"AddLocation"}>Add location</Link>
               </li>
+
               <li>
-                <Link to="People">People</Link>
-              </li>
-              <li>
-                <Link to="Maps">Maps</Link>
-              </li>
-              <li>
-                <Link to="Manage">Manage</Link>
+                <Link to="Statistics">Statistics</Link>
               </li>
               <li className="avatar">
                 <div className="avatar dropdownButton">
