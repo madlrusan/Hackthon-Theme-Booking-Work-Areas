@@ -52,7 +52,7 @@ export const Login = () => {
       if (!err?.response) {
         setErrMsg("No Server Response");
       }
-      setErrMsg(err.response.data[0]);
+      setErrMsg(err.response?.data[0]);
     }
     setEmail("");
     setPwd("");

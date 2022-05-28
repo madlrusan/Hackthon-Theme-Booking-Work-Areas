@@ -50,13 +50,15 @@ export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
       officeId: 0,
       name: floorName,
       desks: desks,
+      rows: rows,
+      columns: columns,
     };
     return floor;
   };
   const handleSubmit = () => {
     modalsContext.setAddFloorOpen(false);
     const returnedValue = saveFloor();
-    onSubmit(returnedValue);
+    onSubmit(returnedValue, rows, columns);
   };
   return (
     <div className="modal-form">

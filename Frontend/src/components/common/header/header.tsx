@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "./header.scss";
 
 import { Avatar, Menu, MenuItem, Typography } from "@mui/material";
@@ -34,7 +34,10 @@ export const Header = () => {
     navigate("/login");
     setAnchorElUser(null);
   };
-
+  const isAdmin = () => {
+    const roles = localStorage.getItem("role")?.split(",");
+    return roles?.includes("Manager");
+  };
   return (
     <div className="sticky-container">
       <section className="navigation">
@@ -46,55 +49,59 @@ export const Header = () => {
             {/* <BurgerMenu /> */}
 
             <ul className="nav-list">
-              <li>
-                <div
-                  className="dropdownButton"
-                  aria-controls="menu-office"
-                  aria-haspopup="true"
-                  onClick={handleOpenNavMenu}
-                >
-                  Locations
-                </div>
+              {locationContext.locations.length > 0 ? (
+                <li>
+                  <div
+                    className="dropdownButton"
+                    aria-controls="menu-office"
+                    aria-haspopup="true"
+                    onClick={handleOpenNavMenu}
+                  >
+                    Locations
+                  </div>
 
-                <Menu
-                  onMouseLeave={() => handleCloseNavMenu()}
-                  id="menu-office"
-                  anchorEl={anchorElNav}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "left",
-                  }}
-                  open={Boolean(anchorElNav)}
-                  onClose={() => handleCloseNavMenu()}
-                  sx={{
-                    display: { xs: "block" },
-                  }}
-                  
-                >
-                  {locationContext.locations.map((location) => {
-                    return (
-                      <MenuItem
-                        key={location.id}
-                        onClick={() => handleCloseNavMenu(location.id)}
-                        style={{backgroundColor:'#C3DBF4'}}
-                      >
-                        <Typography textAlign="center" style={{color: '#003973'}}>
-                          {location.name}
-                        </Typography>
-                      </MenuItem>
-                    );
-                  })}
-                </Menu>
-              </li>
-              <li>
-                <Link to={"AddLocation"}>Add location</Link>
-              </li>
-
+                  <Menu
+                    onMouseLeave={() => handleCloseNavMenu()}
+                    id="menu-office"
+                    anchorEl={anchorElNav}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
+                    open={Boolean(anchorElNav)}
+                    onClose={() => handleCloseNavMenu()}
+                    sx={{
+                      display: { xs: "block" },
+                    }}
+                  >
+                    {locationContext.locations.map((location) => {
+                      return (
+                        <MenuItem
+                          key={location.id}
+                          onClick={() => handleCloseNavMenu(location.id)}
+                          style={{backgroundColor:"#C3DBF4"}}
+                        >
+                          <Typography textAlign="center" style={{color: '#003973'}}>
+                            {location.name}
+                          </Typography>
+                        </MenuItem>
+                      );
+                    })}
+                  </Menu>
+                </li>
+              ) : (
+                ""
+              )}
+              {isAdmin() && (
+                <li>
+                  <Link to={"AddLocation"}>Add location</Link>
+                </li>
+              )}
               <li>
                 <Link to="Statistics">Statistics</Link>
               </li>

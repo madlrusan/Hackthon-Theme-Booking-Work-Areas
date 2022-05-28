@@ -26,13 +26,17 @@ const AddLocationForm = () => {
   });
   const [locationFocus, setLocationFocus] = useState(false);
   const [locationValid, setLocationValid] = useState(false);
-
+  const [rows, setRows] = useState(0);
+  const [columns, setColumns] = useState(0);
   useEffect(() => {
     if (location.name.length > 0) setLocationValid(true);
     else setLocationValid(false);
   });
   const [floors, setFloors] = useState<Floor[]>([]);
-
+  useEffect(() => {
+    const roles = localStorage.getItem("role")?.split(",");
+    if (!roles?.includes("Manager")) navigate("/");
+  }, []);
   const addNewFloor = () => {
     modalsContext.setAddFloorOpen(true);
   };
@@ -52,9 +56,13 @@ const AddLocationForm = () => {
       setLocation({ ...location, id: response.data.officeId });
 
       locationsContext.addLocation(location);
+
       await axios.post(
         ApiUrls.ADD_FLOORS,
-        JSON.stringify({ floors: floors, officeId: response.data.officeId }),
+        JSON.stringify({
+          floors: floors,
+          officeId: response.data.officeId,
+        }),
         {
           headers: {
             "Content-Type": "application/json",
@@ -68,8 +76,11 @@ const AddLocationForm = () => {
       console.error(err);
     }
   };
-  const addFloor = (newFloor: Floor) => {
+  const addFloor = (newFloor: Floor, rows: number, columns: number) => {
     newFloor.officeId = location.id;
+    newFloor.rows = rows;
+    newFloor.columns = columns;
+    console.log(newFloor);
     setFloors([...floors, newFloor]);
   };
   useEffect(() => {
@@ -125,11 +136,9 @@ const AddLocationForm = () => {
               <div className="scrollable">
                 {floors.map((floor) => {
                   return (
-                      <div  key={floor.name}>
-                      <br/>
-                    <FloorElement
-                      floor={floor}
-                    />
+                    <div key={floor.name}>
+                      <br />
+                      <FloorElement floor={floor} />
                     </div>
                   );
                 })}
@@ -147,8 +156,8 @@ const AddLocationForm = () => {
         </div>
       </div>
       <AddFloorModal
-        onSubmit={(e: any) => {
-          addFloor(e);
+        onSubmit={(e: any, rows: number, columns: number) => {
+          addFloor(e, rows, columns);
         }}
       />
       );

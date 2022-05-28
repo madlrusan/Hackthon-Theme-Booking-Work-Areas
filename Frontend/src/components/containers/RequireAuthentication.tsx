@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { Header } from "../common/header/header";
 
-const RequireAuthentication = () => {
+const RequireAuthentication: FC = () => {
   const { isAuthenticated } = useAuth();
 
   return isAuthenticated ? (
