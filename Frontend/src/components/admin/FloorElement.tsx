@@ -6,5 +6,10 @@ interface FloorElementProps {
   onClick: (id: number) => {};
 }
 export const FloorElement: FC<FloorElementProps> = ({ floor, onClick }) => {
-  return <div>{floor.Name}</div>;
+  return (
+    <div>
+      <span>Floor: {floor.name} </span>
+      <span>Number of desks: {floor.desks.length} </span>
+    </div>
+  );
 };
