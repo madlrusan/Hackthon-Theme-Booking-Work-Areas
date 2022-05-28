@@ -3,7 +3,6 @@ import styled from "styled-components";
 import "./floorGrid.scss";
 import { Container, Row, Col } from "react-bootstrap";
 import { Grid } from "@mui/material";
-// import "bootstrap/dist/css/bootstrap.min.css";
 
 type FloorGridProps = {
   rows: number;

@@ -2,19 +2,24 @@ import { Box, Modal, Typography } from "@mui/material";
 import { FC, useContext, useEffect, useState } from "react";
 import { ModalsContext } from "../../context/ModalProvider";
 import { Desk } from "../../models/Desk";
+import { Floor } from "../../models/Floor";
 import FloorGrid, { deskCoordinates } from "../common/floorGrid.tsx/floorGrid";
 
 import "./AddFloorModal.scss";
 export const AddFloorModal: FC = () => {
   const modalsContext = useContext(ModalsContext);
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    modalsContext.setAddFloorOpen(false);
-  };
-  const [desks, setDesks] = useState<Desk[]>();
 
+  const [desks, setDesks] = useState<Desk[]>([]);
+  const [floorName, setFloorName] = useState("");
   const [rows, setRows] = useState(0);
   const [columns, setColumns] = useState(0);
+  const [isValid, setIsValid] = useState(false);
+  useEffect(() => {
+    if (rows === 0 || columns === 0 || desks.length === 0 || floorName === "")
+      setIsValid(false);
+    else setIsValid(true);
+  }, [rows, columns, desks, floorName]);
+
   const populateDesks = (hoteledDesks: deskCoordinates[]) => {
     let desksList: Desk[] = [];
     for (let i = 0; i < rows; i++) {
@@ -35,6 +40,19 @@ export const AddFloorModal: FC = () => {
     }
     setDesks(desksList);
   };
+  const saveFloor = () => {
+    const floor: Floor = {
+      id: 0,
+      officeId: 0,
+      name: floorName,
+      desks: desks,
+    };
+    console.log(floor);
+  };
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    modalsContext.setAddFloorOpen(false);
+  };
   return (
     <div className="modal-form">
       <Modal
@@ -45,10 +63,23 @@ export const AddFloorModal: FC = () => {
         className="form"
       >
         <section className="addFloor">
+          <button
+            className="submitFormButton"
+            disabled={!isValid}
+            onClick={() => saveFloor()}
+          >
+            Save floor
+          </button>
           <form>
             <div className="FormField">
               <label htmlFor="floorName">Floor Name: </label>
-              <input type="text" id="floorName" />
+              <input
+                type="text"
+                id="floorName"
+                onChange={(e) => {
+                  setFloorName(e.target.value);
+                }}
+              />
             </div>
             <div>
               <h2>Note:</h2>
@@ -69,18 +100,28 @@ export const AddFloorModal: FC = () => {
             <input
               type="number"
               id="deskRow"
-              max-value="10"
+              min="0"
+              max="10"
+              value={rows}
               onChange={(e) => {
-                setRows(parseInt(e.target.value));
+                const value = parseInt(e.target.value);
+                if (value > 15) setRows(15);
+                else if (value < 0) setRows(1);
+                else setRows(value);
               }}
             />
             <label htmlFor="deskColumn">Desk columns</label>
             <input
+              value={columns}
               type="number"
               id="deskColumn"
-              max-value="10 "
+              min="0"
+              max="10"
               onChange={(e) => {
-                setColumns(parseInt(e.target.value));
+                const value = parseInt(e.target.value);
+                if (value > 15) setColumns(15);
+                else if (value < 0) setColumns(1);
+                else setColumns(value);
               }}
             />
           </form>
@@ -95,11 +136,7 @@ export const AddFloorModal: FC = () => {
               populateDesks(hoteledDesks);
             }}
           />
-          <div className="btn">
-            <button className="submitFormButton" disabled={false}>
-              Save floor
-            </button>
-          </div>
+          <div className="btn"></div>
         </section>
       </Modal>
     </div>
