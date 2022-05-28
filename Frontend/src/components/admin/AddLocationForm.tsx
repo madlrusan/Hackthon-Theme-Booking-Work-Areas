@@ -125,11 +125,12 @@ const AddLocationForm = () => {
               <div className="scrollable">
                 {floors.map((floor) => {
                   return (
+                      <div  key={floor.name}>
+                      <br/>
                     <FloorElement
-                      key={floor.name}
                       floor={floor}
-                      onClick={async (id) => console.log(id)}
                     />
+                    </div>
                   );
                 })}
               </div>
