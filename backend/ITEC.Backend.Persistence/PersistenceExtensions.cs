@@ -20,6 +20,7 @@ namespace ITEC.Backend.Persistence
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IOfficeRepository, OfficeRepository>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             return services;
         }
 

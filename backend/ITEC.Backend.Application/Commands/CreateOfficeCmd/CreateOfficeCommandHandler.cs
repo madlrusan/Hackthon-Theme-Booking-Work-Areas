@@ -34,9 +34,10 @@ namespace ITEC.Backend.Application.Commands.CreateOfficeCmd
                 CreatedByUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier) 
             };
 
-            await _officeRepository.AddOffice(office);
+            var officeId = await _officeRepository.AddAsync(office);
 
-            return new CreateOfficeCommandResult();
+            var result = new CreateOfficeCommandResult() { OfficeId = officeId };
+            return result;
 
         }
     }

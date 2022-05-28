@@ -11,6 +11,5 @@ namespace ITEC.Backend.Domain.Models
     {
         public string Name { get; set; }
         public string Path { get; set; }
-        public Floor? Floor { get; set; }
     }
 }

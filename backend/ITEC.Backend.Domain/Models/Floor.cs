@@ -11,8 +11,6 @@ namespace ITEC.Backend.Domain.Models
     {
         public string Name { get; set; }
         public int OfficeId { get; set; }
-        public int MapId { get; set; }
-        public UploadedFile? Map { get; set; }
         public Office? Office { get; set; }
         public ICollection<Desk>? Desks { get; set; }
     }

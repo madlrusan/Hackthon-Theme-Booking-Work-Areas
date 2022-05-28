@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace ITEC.Backend.Persistence.Repositories.Abstractions
 {
-    public interface IOfficeRepository
+    public interface IOfficeRepository : IRepository<Office>
     {
         Task<List<Office>> GetOffices(bool includeFloors);
-        Task AddOffice(Office office);
     }
 }

@@ -65,11 +65,8 @@ namespace ITEC.Backend.Persistence.Database
                     .IsRequired();
                 b.Property(o => o.OfficeId)
                     .IsRequired();
-                b.Property(o => o.MapId)
-                    .IsRequired();
                 b.HasOne(o => o.CreatedByUser);
                 b.HasOne(o => o.Office).WithMany(o => o.Floors).OnDelete(DeleteBehavior.Restrict);
-                b.HasOne(o => o.Map).WithOne(o => o.Floor).OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Desk>(b =>
