@@ -20,6 +20,8 @@ builder.Configuration.Bind(nameof(jwtOptions), jwtOptions);
 builder.Services.AddApplicationServices(jwtOptions);
 builder.Services.Configure<JwtOptions>(
         builder.Configuration.GetSection(nameof(JwtOptions)));
+builder.Services.Configure<SendgridOptions>(
+        builder.Configuration.GetSection(nameof(SendgridOptions)));
 builder.Services.AddCors(o => o.AddDefaultPolicy(o => o.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod()));
 builder.Services.AddSwaggerGen(c =>
 {

@@ -1,10 +1,12 @@
-﻿using ITEC.Backend.Application.Shared;
+﻿using ITEC.Backend.Application.Commands.SendEmailCmd;
+using ITEC.Backend.Application.Shared;
 using ITEC.Backend.Domain.Models;
 using ITEC.Backend.Persistence.Repositories.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -17,12 +19,14 @@ namespace ITEC.Backend.Application.Commands.CreateReservationCmd
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IDeskReservationRepository _deskReservationRepository;
         private readonly IRepository<Desk> _deskRepository;
+        private readonly IMediator _mediator;
 
-        public CreateDeskReservationCommandHandler(IHttpContextAccessor httpContextAccessor, IDeskReservationRepository deskReservationRepository, IRepository<Desk> deskRepository)
+        public CreateDeskReservationCommandHandler(IHttpContextAccessor httpContextAccessor, IDeskReservationRepository deskReservationRepository, IRepository<Desk> deskRepository, IMediator mediator)
         {
             _httpContextAccessor = httpContextAccessor;
             _deskReservationRepository = deskReservationRepository;
             _deskRepository = deskRepository;
+            _mediator = mediator;
         }
 
         public async Task<CreateDeskReservationCommandResult> Handle(CreateDeskReservationCommand request, CancellationToken cancellationToken)
@@ -57,6 +61,13 @@ namespace ITEC.Backend.Application.Commands.CreateReservationCmd
 
             await _deskReservationRepository.AddAsync(reservation);
 
+            var emailNotification = new SendEmailCommand()
+            {
+                Receiver = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email),
+                Subject = "Desk reservation confirmation",
+                Body = @$"<h3>Hello,</h3><p>We want to let you know you've booked the desk <b>{desk.Name}</b> for <b>{request.ReservationDate.ToString("dddd, dd MMMM yyyy")}</b><p>Cheers and see you there!</p>"
+            };
+            await _mediator.Publish(emailNotification);
             return new CreateDeskReservationCommandResult();
 
         }
