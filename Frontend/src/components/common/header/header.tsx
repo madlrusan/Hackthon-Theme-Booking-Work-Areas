@@ -89,7 +89,10 @@ export const Header = () => {
                           key={location.id}
                           onClick={() => handleCloseNavMenu(location)}
                         >
-                          <Typography textAlign="center">
+                          <Typography
+                            textAlign="center"
+                            style={{ color: "#003973" }}
+                          >
                             {location.name}
                           </Typography>
                         </MenuItem>
@@ -130,7 +133,12 @@ export const Header = () => {
                     onClose={handleCloseUserMenu}
                   >
                     <MenuItem onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">Logout</Typography>
+                      <Typography
+                        textAlign="center"
+                        style={{ color: "#003973" }}
+                      >
+                        Logout
+                      </Typography>
                     </MenuItem>
                   </Menu>
                 </ul>
