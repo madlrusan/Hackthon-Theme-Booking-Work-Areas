@@ -1,15 +1,24 @@
 .grid-container {
-  display: block;
+  display: flex !important;
+  flex-direction: column !important;
   width: 800px;
   height: 500px;
   padding: 10px;
+  margin-left: 25% !important;
   overflow: auto;
-  margin: 10% !important;
 }
 // Col {
 //     span: 10px;
 //     offset: 10px;
 // }
 .desk {
-  border: 1px solid black;
+  border: 1px solid black !important;
+  width: 30px !important;
+  height: 30px !important;
+  background-color: #d9d9d9 !important;
+  border-style: solid !important;
+  margin: 5px;
+}
+.booked {
+  background-color: red !important;
 }
