@@ -17,6 +17,7 @@ namespace ITEC.Backend.API.Controllers
             _mediator = mediator;
         }
 
+        [Authorize(Roles = "Manager")]
         [HttpPost]
         public async Task<IActionResult> CreateFloor(CreateFloorsCommand cmd)
         {

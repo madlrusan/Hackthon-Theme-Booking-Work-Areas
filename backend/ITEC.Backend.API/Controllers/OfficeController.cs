@@ -33,6 +33,7 @@ namespace ITEC.Backend.API.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Manager")]
         [HttpPost]
         public async Task<IActionResult> CreateOffice(CreateOfficeCommand cmd)
         {
