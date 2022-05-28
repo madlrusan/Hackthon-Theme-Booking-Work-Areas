@@ -87,9 +87,8 @@ const AddLocationForm = () => {
             <button
               onClick={addNewFloor}
               className="btn button-modal-prim"
-              style={{ marginTop: "20px" }}
             >
-              <span style={{ fontWeight: "bold" }}>Add new floor</span>
+              <span className="btn-label">Add new floor</span>
             </button>
           </div>
           <div className="formField">
