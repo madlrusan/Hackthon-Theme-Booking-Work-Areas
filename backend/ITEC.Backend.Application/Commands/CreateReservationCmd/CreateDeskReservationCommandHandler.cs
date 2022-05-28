@@ -39,6 +39,9 @@ namespace ITEC.Backend.Application.Commands.CreateReservationCmd
             if (desk is null)
                 throw new ValidationException("Invalid desk id!");
 
+            if (!desk.IsHotelingDesk)
+                throw new ValidationException("The provided desk is not openned for reservations!");
+
             var deskReservations = await _deskReservationRepository.GetFutureReservationsForDesk(request.DeskId);
 
             if (deskReservations.Any(p => new DateTime(p.ReservationDate.Year, p.ReservationDate.Month, p.ReservationDate.Day) == new DateTime(request.ReservationDate.Year, request.ReservationDate.Month, request.ReservationDate.Day)))
