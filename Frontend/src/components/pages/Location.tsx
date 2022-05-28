@@ -60,9 +60,6 @@ const LocationPage = () => {
             </List>
           </div>
         </div>
-        <div className="floor-content">
-          <FloorGrid rows={10} columns={10} />
-        </div>
       </Card>
     </div>
   );

@@ -41,7 +41,7 @@ const Item: FC<ItemProps> = ({ row, column, bookDesk, bookedDesks }) => {
         bookDesk(isBooked, row, column);
       }}
     >
-      {row},{column}
+      {row} {column}
     </div>
   );
 };
@@ -50,9 +50,7 @@ const FloorGrid = (props: FloorGridProps) => {
   const [bookedDesks, setBookedDesks] = useState<deskCoordinates[]>([]);
   const bookDesk = (isBooked: boolean, row: number, column: number) => {
     if (isBooked) {
-      // debugger;
       const newBookedDesks = bookedDesks.filter((desk) => {
-        console.log(desk);
         return desk.row !== row || desk.column !== column;
       });
       setBookedDesks(newBookedDesks);
@@ -67,7 +65,7 @@ const FloorGrid = (props: FloorGridProps) => {
       columnComponents.push(
         <Col key={i} xs="auto">
           <Item
-            // key={i}
+            key={i}
             row={row}
             column={i}
             bookDesk={(isBooked: boolean, row: number, column: number) =>
