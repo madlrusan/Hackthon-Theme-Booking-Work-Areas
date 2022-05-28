@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+  overflow: hidden;
+}
+
+.window {
+  padding: 10px;
+  margin: 5%;
+  background-color: #c4dbf4 !important;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  h1{
+      position: sticky;
+      top: 0;
+  }
+  .scrollable-list{
+    height:70%;
+    margin-top:10px;
+    overflow: auto;
+  }
+  .floor-content {
+      margin-top:10px
+  }
+
+
+}
+
+@media (max-width: 1361px) {
+  .fullscreen {
+    height: 100%;
+    width: 100%;
+    .window{
+    padding: 10px;
+    margin: 2%;
+    }
+    
+  }
+}
