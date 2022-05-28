@@ -51,7 +51,7 @@ const LocationPage = () => {
             {/* we need search bar and filter buttons */}
             <List>
               {Floors.map((floor) => (
-                <ListItem>
+                <ListItem key={floor.id}>
                   <ListItemButton>
                     <ListItemText>{floor.name}</ListItemText>
                   </ListItemButton>

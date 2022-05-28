@@ -8,6 +8,7 @@ import RequireAuthentication from "./components/containers/RequireAuthentication
 import LocationPage from "./components/pages/Location";
 
 const App = () => {
+  const roles = localStorage.getItem("role")?.split(",");
   return (
     <>
       <Routes>
@@ -15,8 +16,14 @@ const App = () => {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="/" element={<RequireAuthentication />}>
-            <Route path="addLocation" element={<AddLocationForm />} />
-            <Route path="location/:id" element={<LocationPage />} />
+            {roles?.includes("Manager") ? (
+              <>
+                <Route path="addLocation" element={<AddLocationForm />} />
+              </>
+            ) : (
+              <></>
+            )}
+            <Route path="location" element={<LocationPage />} />
           </Route>
         </Route>
       </Routes>

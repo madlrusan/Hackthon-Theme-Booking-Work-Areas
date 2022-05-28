@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "./header.scss";
 
 import { Avatar, Menu, MenuItem, Typography } from "@mui/material";
@@ -46,49 +46,53 @@ export const Header = () => {
             {/* <BurgerMenu /> */}
 
             <ul className="nav-list">
-              <li>
-                <div
-                  className="dropdownButton"
-                  aria-controls="menu-office"
-                  aria-haspopup="true"
-                  onClick={handleOpenNavMenu}
-                >
-                  Locations
-                </div>
+              {locationContext.locations.length > 0 ? (
+                <li>
+                  <div
+                    className="dropdownButton"
+                    aria-controls="menu-office"
+                    aria-haspopup="true"
+                    onClick={handleOpenNavMenu}
+                  >
+                    Locations
+                  </div>
 
-                <Menu
-                  onMouseLeave={() => handleCloseNavMenu()}
-                  id="menu-office"
-                  anchorEl={anchorElNav}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "left",
-                  }}
-                  open={Boolean(anchorElNav)}
-                  onClose={() => handleCloseNavMenu()}
-                  sx={{
-                    display: { xs: "block" },
-                  }}
-                >
-                  {locationContext.locations.map((location) => {
-                    return (
-                      <MenuItem
-                        key={location.id}
-                        onClick={() => handleCloseNavMenu(location.id)}
-                      >
-                        <Typography textAlign="center">
-                          {location.name}
-                        </Typography>
-                      </MenuItem>
-                    );
-                  })}
-                </Menu>
-              </li>
+                  <Menu
+                    onMouseLeave={() => handleCloseNavMenu()}
+                    id="menu-office"
+                    anchorEl={anchorElNav}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
+                    open={Boolean(anchorElNav)}
+                    onClose={() => handleCloseNavMenu()}
+                    sx={{
+                      display: { xs: "block" },
+                    }}
+                  >
+                    {locationContext.locations.map((location) => {
+                      return (
+                        <MenuItem
+                          key={location.id}
+                          onClick={() => handleCloseNavMenu(location.id)}
+                        >
+                          <Typography textAlign="center">
+                            {location.name}
+                          </Typography>
+                        </MenuItem>
+                      );
+                    })}
+                  </Menu>
+                </li>
+              ) : (
+                ""
+              )}
               <li>
                 <Link to={"AddLocation"}>Add location</Link>
               </li>

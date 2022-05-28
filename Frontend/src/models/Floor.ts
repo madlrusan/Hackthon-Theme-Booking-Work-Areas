@@ -5,4 +5,6 @@ export type Floor = {
   name: string;
   officeId: number;
   desks: Desk[];
+  rows: number;
+  columns: number;
 };
