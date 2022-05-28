@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ITEC.Backend.API.Controllers;
 
-[Authorize]
+[Authorize(Roles = "Employee")]
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase

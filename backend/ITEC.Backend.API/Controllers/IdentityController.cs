@@ -2,6 +2,7 @@
 using ITEC.Backend.Application.Commands.UserSignInCmd;
 using ITEC.Backend.Application.Options;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -35,6 +36,13 @@ namespace ITEC.Backend.API.Controllers
         {
             var result = await _mediator.Send(cmd);
             return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("checksession")]
+        public IActionResult CheckSession()
+        {
+            return Ok();
         }
     }
 }

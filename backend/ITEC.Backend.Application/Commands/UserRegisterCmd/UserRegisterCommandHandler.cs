@@ -46,6 +46,8 @@ namespace ITEC.Backend.Application.Commands.UserRegisterCmd
             if (!userResult.Succeeded)
                 throw new ValidationException("Error creating the user");
 
+            await _userManager.AddToRoleAsync(newUser, "Employee");
+
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -54,7 +56,8 @@ namespace ITEC.Backend.Application.Commands.UserRegisterCmd
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, newUser.Id),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email, newUser.Email)
+                    new Claim(JwtRegisteredClaimNames.Email, newUser.Email),
+                    new Claim(ClaimTypes.Role, "Employee")
                 }),
                 Expires = DateTime.UtcNow.AddDays(5),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
