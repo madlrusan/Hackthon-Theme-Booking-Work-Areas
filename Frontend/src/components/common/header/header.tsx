@@ -40,6 +40,8 @@ export const Header = () => {
   };
 
   const handleCloseUserMenu = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
     setAnchorElUser(null);
   };
 

@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import Register from "../authentication/Register";
 
 const Layout = () => {
   return (
