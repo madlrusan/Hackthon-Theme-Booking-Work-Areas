@@ -9,7 +9,10 @@ import { AddFloorModal } from "./AddFloorModal";
 import axios from "../../api/axios";
 import { ApiUrls } from "../constants/ApiUrls";
 import { Office } from "../../models/Office";
-import { LocationContext } from "../../context/LocationProvider";
+import {
+  LocationContext,
+  LocationProvider,
+} from "../../context/LocationProvider";
 import { Navigate, useNavigate } from "react-router-dom";
 const AddLocationForm = () => {
   const navigate = useNavigate();
@@ -30,10 +33,10 @@ const AddLocationForm = () => {
   });
   const [floors, setFloors] = useState<Floor[]>([
     {
-      Id: 0,
-      Name: "",
-      Map: "",
-      OfficeId: 0,
+      id: 0,
+      name: "",
+      desks: [],
+      officeId: 0,
     },
   ]);
 
@@ -101,6 +104,13 @@ const AddLocationForm = () => {
                   }}
                 />
               </div>
+              <button
+                type="button"
+                onClick={addNewFloor}
+                className="btn button-modal-prim"
+              >
+                <span className="btn-label">Add floor</span>
+              </button>
             </form>
             <div className="formField">
               <label htmlFor="floor">Floors</label>
@@ -108,7 +118,7 @@ const AddLocationForm = () => {
                 {floors.map((floor) => {
                   return (
                     <FloorElement
-                      key={floor.Id}
+                      key={floor.id}
                       floor={floor}
                       onClick={async (id) => console.log(id)}
                     />

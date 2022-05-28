@@ -1,6 +1,8 @@
+import { Desk } from "./Desk";
+
 export type Floor = {
-  Id: number;
-  Name: string;
-  OfficeId: number;
-  Map: string;
+  id: number;
+  name: string;
+  officeId: number;
+  desks: Desk[];
 };

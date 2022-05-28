@@ -1,6 +1,7 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { FC, useContext, useEffect, useState } from "react";
 import { ModalsContext } from "../../context/ModalProvider";
+import { Desk } from "../../models/Desk";
 
 export const AddFloorModal: FC = () => {
   const modalsContext = useContext(ModalsContext);
@@ -9,6 +10,7 @@ export const AddFloorModal: FC = () => {
     event.preventDefault();
     modalsContext.setAddFloorOpen(false);
   };
+  const [desks, setDesks] = useState<Desk[]>();
   return (
     <Modal
       open={modalsContext.isAddFloorOpen}
@@ -27,12 +29,15 @@ export const AddFloorModal: FC = () => {
               your input
             </span>
           </div>
-          <label htmlFor="deskRow">Desk row</label>
-          <input type="text" id="deskRow" />
-          <label htmlFor="deskColumn">Desk column</label>
-          <input type="text" id="deskColumn" />
+          <label htmlFor="deskRow">Desk rows</label>
+          <input type="number" id="deskRow" />
+          <label htmlFor="deskColumn">Desk columns</label>
+          <input type="number" id="deskColumn" />
         </form>
-
+        <div>
+          <h2>Location map</h2>
+          <span>Chose offices that are permanently booked.</span>
+        </div>
         <div className="btn">
           <button className="submitFormButton" disabled={false}>
             Save floor

@@ -23,9 +23,9 @@ const Floors = [
   { id: 9, name: "Bolo" },
 ];
 const LocationPage = () => {
-  const params = useParams();
+  // const params = useParams();
   useEffect(() => {
-    console.log(params.id);
+    // console.log(params.id);
   }, []);
   const [locationName, setLocationName] = useState("");
   const [foundLocation, setFoundLocation] = useState(Floors);
@@ -46,7 +46,7 @@ const LocationPage = () => {
     <div className="fullscreen">
       <Card className="window">
         <div>
-          <h1>{params.id}</h1>
+          {/* <h1>{params.id}</h1> */}
           <div className="scrollable-list">
             {/* we need search bar and filter buttons */}
             <List>
@@ -60,7 +60,9 @@ const LocationPage = () => {
             </List>
           </div>
         </div>
-        <div className="floor-content"><FloorGrid rows={10} columns={10}/></div>
+        <div className="floor-content">
+          <FloorGrid rows={10} columns={10} />
+        </div>
       </Card>
     </div>
   );
