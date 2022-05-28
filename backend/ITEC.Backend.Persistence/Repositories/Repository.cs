@@ -26,9 +26,15 @@ namespace ITEC.Backend.Persistence.Repositories
             return entry.Entity.Id;
         }
 
+        public async Task AddRangeAsync(List<T> entities)
+        {
+            await _dbContext.Set<T>().AddRangeAsync(entities);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<T> GetById(int id)
         {
-            return await _dbContext.Set<T>().FirstOrDefaultAsync(p => p.Id == id);
+            return await _dbContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
         }
     }
 }

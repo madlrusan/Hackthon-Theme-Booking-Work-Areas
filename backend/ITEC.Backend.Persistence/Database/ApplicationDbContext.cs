@@ -76,12 +76,10 @@ namespace ITEC.Backend.Persistence.Database
                     .HasMaxLength(250)
                     .IsUnicode()
                     .IsRequired();
-                b.Property(o => o.LocationX)
-                    .IsRequired();
-                b.Property(o => o.LocationY)
-                    .IsRequired();
                 b.Property(o => o.IsHotelingDesk)
                     .HasDefaultValue(true);
+                b.Property(o => o.Order)
+                    .IsRequired();
                 b.Property(o => o.CreatedAtTimeUtc)
                     .IsRequired();
                 b.Property(o => o.CreatedByUserId)

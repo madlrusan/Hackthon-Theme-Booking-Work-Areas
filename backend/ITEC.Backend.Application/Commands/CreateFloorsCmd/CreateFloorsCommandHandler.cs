@@ -32,13 +32,24 @@ namespace ITEC.Backend.Application.Commands.CreateFloorsCmd
 
             if (office is null)
                 throw new ValidationException("OfficeId is invalid!");
-            var floor = new Floor() { 
-                OfficeId = request.OfficeId, 
-                CreatedAtTimeUtc = DateTime.UtcNow, 
-                Name = request.Name, 
-                CreatedByUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier) 
-            };
-            await _floorRepository.AddAsync(floor);
+
+            var floors = request.Floors.Select(c => new Floor()
+                            {
+                                OfficeId = request.OfficeId,
+                                CreatedAtTimeUtc = DateTime.UtcNow,
+                                CreatedByUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier),
+                                Name = c.Name,
+                                Desks = c.Desks.Select((desk, index) => new Desk()
+                                    {
+                                        CreatedAtTimeUtc = DateTime.UtcNow,
+                                        CreatedByUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier),
+                                        Name = desk.Name,
+                                        IsHotelingDesk = desk.IsHotelingDesk,
+                                        Order = index
+                                    }).ToList()
+                            }).ToList();
+            
+            await _floorRepository.AddRangeAsync(floors);
             return new CreateFloorsCommandResult();
         }
     }

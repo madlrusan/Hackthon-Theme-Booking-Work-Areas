@@ -11,14 +11,13 @@ namespace ITEC.Backend.Application.Commands.CreateFloorsCmd
     {
         public CreateFloorsCommandValidator()
         {
-            RuleFor(c => c.Name).NotEmpty().NotNull()
-                .WithMessage("Floor name cannot be null or empty!");
-
-            RuleFor(c => c.Name).MaximumLength(250)
-                .WithMessage("Floor name should have maximum of 250 characters!");
-
             RuleFor(c => c.OfficeId).NotNull()
                 .WithMessage("Missing OfficeId!");
+
+            RuleFor(c => c.Floors).NotEmpty().NotNull()
+                .WithMessage("Floors list cannot be null or empty!");
+
+            RuleForEach(c => c.Floors).SetValidator(new CreateFloorCommandValidator());
         }
     }
 }
