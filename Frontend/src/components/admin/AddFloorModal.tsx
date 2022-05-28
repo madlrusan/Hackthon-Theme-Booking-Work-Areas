@@ -70,15 +70,8 @@ export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
         className="form"
       >
         <section className="addFloor">
-          <button
-            className="submitFormButton"
-            disabled={!isValid}
-            onClick={() => handleSubmit()}
-          >
-            Save floor
-          </button>
           <form>
-            <div className="FormField">
+            <div className="formField">
               <label htmlFor="floorName">Floor Name: </label>
               <input
                 type="text"
@@ -88,22 +81,21 @@ export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
                 }}
               />
             </div>
-            <div>
+            <div className="formField">
               <h2>Note:</h2>
               <span>
                 The office will be displayed as a row x column matrix based on
                 your input
               </span>
             </div>
-          </form>
-          <form>
-            <div className="file-adding">
+            <div className="formField">
               <div className="Field">
                 <h2>Location map</h2>
                 <span>Chose offices that are permanently booked.</span>
               </div>
             </div>
-            <label htmlFor="deskRow">Desk rows</label>
+            <div className="formField">
+            <label htmlFor="deskRow">Desk rows:     </label>
             <input
               type="number"
               id="deskRow"
@@ -117,7 +109,9 @@ export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
                 else setRows(value);
               }}
             />
-            <label htmlFor="deskColumn">Desk columns</label>
+            </div>
+            <div className="formField">
+            <label htmlFor="deskColumn">Desk columns: </label>
             <input
               value={columns}
               type="number"
@@ -131,11 +125,9 @@ export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
                 else setColumns(value);
               }}
             />
+            </div>
+            
           </form>
-          <div>
-            <h2>Location map</h2>
-            <span>Chose offices that are permanently booked.</span>
-          </div>
           <FloorGrid
             rows={rows}
             columns={columns}
@@ -143,7 +135,15 @@ export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
               populateDesks(hoteledDesks);
             }}
           />
-          <div className="btn"></div>
+          <div className="btn">
+              <button
+            className="submitFormButton"
+            disabled={!isValid}
+            onClick={() => handleSubmit()}
+          >
+            Save floor
+          </button>
+          </div>
         </section>
       </Modal>
     </div>

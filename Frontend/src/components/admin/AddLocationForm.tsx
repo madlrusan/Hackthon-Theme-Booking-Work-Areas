@@ -123,7 +123,7 @@ const AddLocationForm = () => {
               <button
                 type="button"
                 onClick={addNewFloor}
-                className="btn button-modal-prim"
+                className="btn button-form"
               >
                 <span className="btn-label">Add floor</span>
               </button>
@@ -133,17 +133,18 @@ const AddLocationForm = () => {
               <div className="scrollable">
                 {floors.map((floor) => {
                   return (
+                      <div  key={floor.name}>
+                      <br/>
                     <FloorElement
-                      key={floor.name}
                       floor={floor}
-                      onClick={async (id) => console.log(id)}
                     />
+                    </div>
                   );
                 })}
               </div>
               <button
                 onClick={onSubmit}
-                className="btn button-modal-prim"
+                className="btn button-form"
                 disabled={!locationValid}
               >
                 <span className="btn-label">Save office</span>

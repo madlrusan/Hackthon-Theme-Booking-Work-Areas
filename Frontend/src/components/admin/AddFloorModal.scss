@@ -1,21 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 $breakpoint: 280px;
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Nunito", sans-serif;
-  font-size: 15px;
-}
+
 .form {
+    color:red;
   padding: 10% 25%;
   margin: 0% -25% 10% 10%;
   .addFloor {
     font-family: "Nunito", sans-serif;
-    font-size: 22px;
-    color: #000;
+    font-size: 15px;
+    color: #003973;
     border-radius: 5%;
+    max-height: 55rem;
     background-color:#c4dbf4;
+    height: 75vw;
+    margin-top:1%;
     .errmsg {
       background-color: lightpink;
       color: firebrick;
@@ -38,10 +36,11 @@ $breakpoint: 280px;
     .formField {
       display: flex;
       flex-direction: column;
+      margin-top: 0.25rem;
       label {
         display: flex;
         align-items: center;
-        color: rgb(223 234 246);
+        color: #003973;
       }
       .instructions > svg {
         margin-right: 0.25rem;
@@ -63,15 +62,19 @@ $breakpoint: 280px;
       }
       input[type="text"],
       input[type="password"],
+      input[type="number"],
       .submitFormButton,
       textarea,
       button {
         font-family: "Nunito", sans-serif;
-        font-size: 22px;
+        font-size: 15px;
         padding: 0.25rem;
         border-radius: 0.5rem;
         outline-color: #003973;
+        border-color: #003973;
+        color: #003973;
       }
+
     }
     h1 {
       color: rgb(223 234 246);
@@ -93,9 +96,9 @@ $breakpoint: 280px;
   .btn {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
-    width: 35% !important;
-    // margin-left: 65%;
+    margin-top: 10px;
+    width: 50% !important;
+    margin-left: 50%;
     &.button-modal-prim {
       padding-right: 25px !important;
       border-radius: 0.5rem;
@@ -170,4 +173,7 @@ $breakpoint: 280px;
   &::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   }
+}
+.field-adding {
+    margin-top:10px;
 }
