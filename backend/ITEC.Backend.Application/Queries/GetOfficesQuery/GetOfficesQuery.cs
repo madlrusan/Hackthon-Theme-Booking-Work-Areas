@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITEC.Backend.Application.Commands.GetOfficeQuery
+namespace ITEC.Backend.Application.Queries.GetOfficeQuery
 {
-    public class GetOfficeQuery : IRequest<List<Office>>
+    public class GetOfficesQuery : IRequest<List<Office>>
     {
         public bool includeFloors { get; set; }
     }

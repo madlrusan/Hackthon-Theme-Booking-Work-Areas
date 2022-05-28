@@ -1,5 +1,6 @@
 ﻿using ITEC.Backend.Application.Commands.CreateOfficeCmd;
-using ITEC.Backend.Application.Commands.GetOfficeQuery;
+using ITEC.Backend.Application.Queries.GetOfficeByIdQuery;
+using ITEC.Backend.Application.Queries.GetOfficeQuery;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +20,16 @@ namespace ITEC.Backend.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetOffices([FromQuery] GetOfficeQuery query)
+        public async Task<IActionResult> GetOffices([FromQuery] GetOfficesQuery query)
         {
             var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOffices([FromRoute] int id)
+        {
+            var result = await _mediator.Send(new GetOfficeByIdQuery() { OfficeId = id});
             return Ok(result);
         }
 

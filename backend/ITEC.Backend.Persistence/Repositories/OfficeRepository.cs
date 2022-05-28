@@ -14,6 +14,11 @@ namespace ITEC.Backend.Persistence.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task<Office> GetOfficeByIdWithDesks(int officeId)
+        {
+            return await _dbContext.Set<Office>().AsNoTracking().Include(o => o.Floors).ThenInclude(o => o.Desks).FirstOrDefaultAsync(o => o.Id == officeId);
+        }
+
         public async Task<List<Office>> GetOffices(bool includeFloors)
         {
             var query = _dbContext.Set<Office>().AsNoTracking();
