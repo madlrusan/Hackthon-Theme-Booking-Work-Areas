@@ -5,7 +5,6 @@ import { Header } from "../common/header/header";
 
 const RequireAuthentication: FC = () => {
   const { isAuthenticated } = useAuth();
-  const roles = localStorage.getItem("role")?.split(",");
 
   return isAuthenticated ? (
     <>

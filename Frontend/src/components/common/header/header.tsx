@@ -34,7 +34,10 @@ export const Header = () => {
     navigate("/login");
     setAnchorElUser(null);
   };
-
+  const isAdmin = () => {
+    const roles = localStorage.getItem("role")?.split(",");
+    return roles?.includes("Manager");
+  };
   return (
     <div className="sticky-container">
       <section className="navigation">
@@ -93,10 +96,11 @@ export const Header = () => {
               ) : (
                 ""
               )}
-              <li>
-                <Link to={"AddLocation"}>Add location</Link>
-              </li>
-
+              {isAdmin() && (
+                <li>
+                  <Link to={"AddLocation"}>Add location</Link>
+                </li>
+              )}
               <li>
                 <Link to="Statistics">Statistics</Link>
               </li>

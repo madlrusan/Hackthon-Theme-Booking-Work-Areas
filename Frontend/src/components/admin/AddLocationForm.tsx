@@ -33,7 +33,10 @@ const AddLocationForm = () => {
     else setLocationValid(false);
   });
   const [floors, setFloors] = useState<Floor[]>([]);
-
+  useEffect(() => {
+    const roles = localStorage.getItem("role")?.split(",");
+    if (!roles?.includes("Manager")) navigate("/");
+  }, []);
   const addNewFloor = () => {
     modalsContext.setAddFloorOpen(true);
   };
@@ -133,11 +136,9 @@ const AddLocationForm = () => {
               <div className="scrollable">
                 {floors.map((floor) => {
                   return (
-                      <div  key={floor.name}>
-                      <br/>
-                    <FloorElement
-                      floor={floor}
-                    />
+                    <div key={floor.name}>
+                      <br />
+                      <FloorElement floor={floor} />
                     </div>
                   );
                 })}
