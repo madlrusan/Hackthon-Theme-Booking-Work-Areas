@@ -74,14 +74,16 @@ export const Header = () => {
                   sx={{
                     display: { xs: "block" },
                   }}
+                  
                 >
                   {locationContext.locations.map((location) => {
                     return (
                       <MenuItem
                         key={location.id}
                         onClick={() => handleCloseNavMenu(location.id)}
+                        style={{backgroundColor:'#C3DBF4'}}
                       >
-                        <Typography textAlign="center">
+                        <Typography textAlign="center" style={{color: '#003973'}}>
                           {location.name}
                         </Typography>
                       </MenuItem>
@@ -117,8 +119,8 @@ export const Header = () => {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                   >
-                    <MenuItem onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">Logout</Typography>
+                    <MenuItem onClick={handleCloseUserMenu} style={{backgroundColor:'#C3DBF4'}}>
+                      <Typography textAlign="center" style={{color: '#003973'}}>Logout</Typography>
                     </MenuItem>
                   </Menu>
                 </ul>
