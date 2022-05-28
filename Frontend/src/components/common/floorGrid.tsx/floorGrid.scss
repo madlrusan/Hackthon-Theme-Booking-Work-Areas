@@ -2,23 +2,39 @@
   display: flex !important;
   flex-direction: column !important;
   width: 800px;
-  height: 500px;
+  height: 420px;
   padding: 10px;
-  margin-left: 25% !important;
+  margin-left: -5% !important;
   overflow: auto;
+  align-content: space-around;
 }
 // Col {
 //     span: 10px;
 //     offset: 10px;
 // }
 .desk {
-  border: 1px solid black !important;
-  width: 30px !important;
-  height: 30px !important;
-  background-color: #d9d9d9 !important;
-  border-style: solid !important;
-  margin: 5px;
+    border: 1px solid black !important;
+    width: 30px !important;
+    height: 30px !important;
+    background-color: #ddd2d2 !important;
+    border-style: solid !important;
+    margin: 5px;
+    border-radius: 15%;
+    text-align: center;
+    align-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .booked {
   background-color: red !important;
+}
+button {
+    font-family: "Nunito", sans-serif;
+        font-size: 15px;
+        padding: 0.25rem;
+        border-radius: 0.5rem;
+        outline-color: #003973;
+        background-color: #c4dbf4 ;
+        margin-top: -35px;
 }

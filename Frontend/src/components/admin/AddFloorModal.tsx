@@ -46,26 +46,25 @@ export const AddFloorModal: FC = () => {
       >
         <section className="addFloor">
           <form>
-            <div className="FormField">
+            <div className="formField">
               <label htmlFor="floorName">Floor Name: </label>
               <input type="text" id="floorName" />
             </div>
-            <div>
+            <div className="formField">
               <h2>Note:</h2>
               <span>
                 The office will be displayed as a row x column matrix based on
                 your input
               </span>
             </div>
-          </form>
-          <form>
-            <div className="file-adding">
+            <div className="formField">
               <div className="Field">
                 <h2>Location map</h2>
                 <span>Chose offices that are permanently booked.</span>
               </div>
             </div>
-            <label htmlFor="deskRow">Desk rows</label>
+            <div className="formField">
+            <label htmlFor="deskRow">Desk rows:     </label>
             <input
               type="number"
               id="deskRow"
@@ -74,7 +73,9 @@ export const AddFloorModal: FC = () => {
                 setRows(parseInt(e.target.value));
               }}
             />
-            <label htmlFor="deskColumn">Desk columns</label>
+            </div>
+            <div className="formField">
+            <label htmlFor="deskColumn">Desk columns: </label>
             <input
               type="number"
               id="deskColumn"
@@ -83,11 +84,8 @@ export const AddFloorModal: FC = () => {
                 setColumns(parseInt(e.target.value));
               }}
             />
+            </div>
           </form>
-          <div>
-            <h2>Location map</h2>
-            <span>Chose offices that are permanently booked.</span>
-          </div>
           <FloorGrid
             rows={rows}
             columns={columns}
