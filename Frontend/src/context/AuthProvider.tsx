@@ -32,7 +32,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         await axios.get(ApiUrls.CHECK_SESSION, {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           withCredentials: true,
         });
