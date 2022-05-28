@@ -17,7 +17,7 @@ const init: AuthContextType = {
 export const AuthContext = createContext<AuthContextType>(init);
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     const checkIfIsAuthenticated = async () => {
@@ -29,7 +29,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           },
           withCredentials: true,
         });
-        navigate("/");
+        setIsAuthenticated(true);
       } catch (err: any) {
         if (!err?.response) {
           console.log("No Server Response");

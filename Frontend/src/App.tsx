@@ -11,10 +11,10 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route element={<Layout />}>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route element={<RequireAuthentication />}>
+          <Route path="/" element={<RequireAuthentication />}>
             <Route path="addLocation" element={<AddLocationForm />} />
             <Route path="location/:id" element={<LocationPage />} />
           </Route>

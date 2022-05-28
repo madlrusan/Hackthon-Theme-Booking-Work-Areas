@@ -3,9 +3,11 @@ import "../common/styles/authentication.scss";
 import axios from "../../api/axios";
 import { ApiUrls } from "../constants/ApiUrls";
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const authenticationContext = useAuth();
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
   const [email, setEmail] = useState("");
@@ -42,6 +44,7 @@ export const Login = () => {
       if (response.data.success === true) {
         localStorage.setItem("token", response.data.token);
         navigate("/");
+        authenticationContext.setIsAuthenticated(true);
       }
     } catch (err: any) {
       if (!err?.response) {
