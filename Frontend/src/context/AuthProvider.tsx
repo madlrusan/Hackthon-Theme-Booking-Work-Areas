@@ -1,4 +1,7 @@
-import { createContext, FC, useState } from "react";
+import { createContext, FC, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "../api/axios";
+import { ApiUrls } from "../components/constants/ApiUrls";
 
 interface AuthProviderProps {
   children: any;
@@ -15,6 +18,28 @@ export const AuthContext = createContext<AuthContextType>(init);
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const checkIfIsAuthenticated = async () => {
+      try {
+        const response = await axios.get(ApiUrls.CHECK_SESSION, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          withCredentials: true,
+        });
+        navigate("/");
+      } catch (err: any) {
+        if (!err?.response) {
+          console.log("No Server Response");
+        }
+        navigate("/login");
+      }
+    };
+    checkIfIsAuthenticated().then(); //FA SA FIE PERIODIC
+  }, []);
+
   const ctx: AuthContextType = {
     isAuthenticated: isAuthenticated,
     setIsAuthenticated: setIsAuthenticated,

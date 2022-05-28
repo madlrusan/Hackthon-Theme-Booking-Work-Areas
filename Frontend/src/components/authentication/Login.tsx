@@ -1,26 +1,25 @@
 import { useRef, useState, useEffect, useContext } from "react";
-import useAuth from "../../hooks/useAuth";
 import "./authentication.scss";
 import axios from "../../api/axios";
 import { ApiUrls } from "../constants/ApiUrls";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
-  const { setIsAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
-  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [isValid, setIsValid] = useState(true);
 
   useEffect(() => {
-    if (user !== "" && pwd !== "") {
+    if (email !== "" && pwd !== "") {
       setIsValid(false);
     } else {
       setIsValid(true);
     }
-  }, [user, pwd]);
+  }, [email, pwd]);
 
   useEffect(() => {
     userRef.current?.focus();
@@ -28,30 +27,30 @@ export const Login = () => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, pwd]);
+  }, [email, pwd]);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await axios.post(
         ApiUrls.LOGIN,
-        JSON.stringify({ user, pwd }),
+        JSON.stringify({ email: email, password: pwd }),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       );
-      const accessToken = response?.data?.accessToken;
-      setIsAuthenticated({ user, pwd, accessToken });
-      setUser("");
-      setPwd("");
+      if (response.data.success === true) {
+        localStorage.setItem("token", response.data.token);
+        navigate("/");
+      }
     } catch (err: any) {
       if (!err?.response) {
-        setErrMsg("No server response");
-      } else {
-        setErrMsg("Login was not successful");
+        setErrMsg("No Server Response");
       }
-      errRef.current?.focus();
+      setErrMsg(err.response.data[0]);
     }
+    setEmail("");
+    setPwd("");
   };
   return (
     <div className="form">
@@ -66,14 +65,14 @@ export const Login = () => {
         <h1>Sign In</h1>
         <form onSubmit={handleSubmit}>
           <div className="formField">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Email</label>
             <input
               type="text"
               id="username"
               ref={userRef}
               autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
               required
             />
           </div>
