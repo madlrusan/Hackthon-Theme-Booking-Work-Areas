@@ -68,13 +68,6 @@ export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
         className="form"
       >
         <section className="addFloor">
-          <button
-            className="submitFormButton"
-            disabled={!isValid}
-            onClick={() => handleSubmit()}
-          >
-            Save floor
-          </button>
           <form>
             <div className="formField">
               <label htmlFor="floorName">Floor Name: </label>
@@ -131,6 +124,7 @@ export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
               }}
             />
             </div>
+            
           </form>
           <FloorGrid
             rows={rows}
@@ -139,7 +133,15 @@ export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
               populateDesks(hoteledDesks);
             }}
           />
-          <div className="btn"></div>
+          <div className="btn">
+              <button
+            className="submitFormButton"
+            disabled={!isValid}
+            onClick={() => handleSubmit()}
+          >
+            Save floor
+          </button>
+          </div>
         </section>
       </Modal>
     </div>
