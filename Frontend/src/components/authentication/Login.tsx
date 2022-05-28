@@ -4,6 +4,7 @@ import axios from "../../api/axios";
 import { ApiUrls } from "../constants/ApiUrls";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { parseJwt } from "../constants/jwtParsers";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -42,9 +43,10 @@ export const Login = () => {
         }
       );
       if (response.data.success === true) {
-        localStorage.setItem("token", response.data.token);
         navigate("/");
-        authenticationContext.setIsAuthenticated(true);
+        const parsedValues = parseJwt(response.data.token);
+        localStorage.setItem("role", parsedValues.role);
+        authenticationContext.login(response.data.token);
       }
     } catch (err: any) {
       if (!err?.response) {

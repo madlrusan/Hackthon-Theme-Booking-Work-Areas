@@ -5,9 +5,7 @@ import { Header } from "../common/header/header";
 
 const RequireAuthentication = () => {
   const { isAuthenticated } = useAuth();
-  useEffect(() => {
-    console.log(isAuthenticated);
-  });
+
   return isAuthenticated ? (
     <>
       <Header />

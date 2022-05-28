@@ -11,6 +11,7 @@ import axios from "../../api/axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ApiUrls } from "../constants/ApiUrls";
 import useAuth from "../../hooks/useAuth";
+import { parseJwt } from "../constants/jwtParsers";
 //must start with a letter, and can continue with any kind of letter,digit or sign, between 4 and 23 characters
 //must contain a lower case letter, upper case letter, number and a sign, must be between 8 and 24 characters
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -73,9 +74,10 @@ const Register = () => {
         }
       );
       if (response.data.success === true) {
-        localStorage.setItem("token", response.data.token);
-        authenticationContext.setIsAuthenticated(true);
         navigate("/");
+        const parsedValues = parseJwt(response.data.token);
+        localStorage.setItem("role", parsedValues.role);
+        authenticationContext.login();
       }
     } catch (err: any) {
       if (!err?.response) {
