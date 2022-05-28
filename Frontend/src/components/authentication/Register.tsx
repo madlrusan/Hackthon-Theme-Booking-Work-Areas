@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "./authentication.scss";
+import "../common/styles/authentication.scss";
 import axios from "../../api/axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ApiUrls } from "../constants/ApiUrls";

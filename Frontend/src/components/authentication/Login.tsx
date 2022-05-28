@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useContext } from "react";
-import "./authentication.scss";
+import "../common/styles/authentication.scss";
 import axios from "../../api/axios";
 import { ApiUrls } from "../constants/ApiUrls";
 import { Link, useNavigate } from "react-router-dom";
