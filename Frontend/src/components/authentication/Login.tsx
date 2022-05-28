@@ -54,54 +54,56 @@ export const Login = () => {
     }
   };
   return (
-    <div className="form">
-      <section className="registerForm">
-        <p
-          ref={errRef}
-          className={errMsg ? "errmsg" : "offscreen"}
-          aria-live="assertive"
-        >
-          {errMsg}
-        </p>
-        <h1>Sign In</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="formField">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              ref={userRef}
-              autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
-              required
-            />
-          </div>
-          <div className="formField">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              onChange={(e) => setPwd(e.target.value)}
-              value={pwd}
-              required
-            />
-          </div>
-          <div className="btn">
-            <button className="submitFormButton" disabled={isValid}>
-              Sign In
-            </button>
-          </div>
-        </form>
-        <p className="already">
-          Need an Account? <br />
-          <span className="line">
-            <Link to="/register" replace>
-              Sign Up
-            </Link>
-          </span>
-        </p>
-      </section>
+    <div className="fullscreen">
+      <div className="form">
+        <section className="registerForm">
+          <p
+            ref={errRef}
+            className={errMsg ? "errmsg" : "offscreen"}
+            aria-live="assertive"
+          >
+            {errMsg}
+          </p>
+          <h1>Sign In</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="formField">
+              <label htmlFor="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                ref={userRef}
+                autoComplete="off"
+                onChange={(e) => setUser(e.target.value)}
+                value={user}
+                required
+              />
+            </div>
+            <div className="formField">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                onChange={(e) => setPwd(e.target.value)}
+                value={pwd}
+                required
+              />
+            </div>
+            <div className="btn">
+              <button className="submitFormButton" disabled={isValid}>
+                Sign In
+              </button>
+            </div>
+          </form>
+          <p className="already">
+            Need an Account? <br />
+            <span className="line">
+              <Link to="/register" replace>
+                Sign Up
+              </Link>
+            </span>
+          </p>
+        </section>
+      </div>
     </div>
   );
 };

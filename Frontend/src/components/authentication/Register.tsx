@@ -81,6 +81,7 @@ const Register = () => {
   };
 
   return (
+    <div className="fullscreen">
     <div className="form">
       <section className="registerForm">
         <p
@@ -221,6 +222,7 @@ const Register = () => {
           </span>
         </p>
       </section>
+    </div>
     </div>
   );
 };
