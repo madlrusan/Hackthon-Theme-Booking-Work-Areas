@@ -6,7 +6,11 @@ import { Floor } from "../../models/Floor";
 import FloorGrid, { deskCoordinates } from "../common/floorGrid.tsx/floorGrid";
 
 import "./AddFloorModal.scss";
-export const AddFloorModal: FC = () => {
+interface AddFloorModalProps {
+  onSubmit: any;
+}
+
+export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
   const modalsContext = useContext(ModalsContext);
 
   const [desks, setDesks] = useState<Desk[]>([]);
@@ -47,11 +51,12 @@ export const AddFloorModal: FC = () => {
       name: floorName,
       desks: desks,
     };
-    console.log(floor);
+    return floor;
   };
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     modalsContext.setAddFloorOpen(false);
+    const returnedValue = saveFloor();
+    onSubmit(returnedValue);
   };
   return (
     <div className="modal-form">
@@ -66,7 +71,7 @@ export const AddFloorModal: FC = () => {
           <button
             className="submitFormButton"
             disabled={!isValid}
-            onClick={() => saveFloor()}
+            onClick={() => handleSubmit()}
           >
             Save floor
           </button>
@@ -105,7 +110,7 @@ export const AddFloorModal: FC = () => {
               value={rows}
               onChange={(e) => {
                 const value = parseInt(e.target.value);
-                if (value > 15) setRows(15);
+                if (value > 10) setRows(10);
                 else if (value < 0) setRows(1);
                 else setRows(value);
               }}
@@ -119,7 +124,7 @@ export const AddFloorModal: FC = () => {
               max="10"
               onChange={(e) => {
                 const value = parseInt(e.target.value);
-                if (value > 15) setColumns(15);
+                if (value > 10) setColumns(10);
                 else if (value < 0) setColumns(1);
                 else setColumns(value);
               }}

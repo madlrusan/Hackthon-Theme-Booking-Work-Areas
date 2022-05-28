@@ -31,14 +31,7 @@ const AddLocationForm = () => {
     if (location.name.length > 0) setLocationValid(true);
     else setLocationValid(false);
   });
-  const [floors, setFloors] = useState<Floor[]>([
-    {
-      id: 0,
-      name: "",
-      desks: [],
-      officeId: 0,
-    },
-  ]);
+  const [floors, setFloors] = useState<Floor[]>([]);
 
   const addNewFloor = () => {
     modalsContext.setAddFloorOpen(true);
@@ -56,14 +49,29 @@ const AddLocationForm = () => {
           withCredentials: true,
         }
       );
-      location.id = response.data.officeId;
+      setLocation({ ...location, id: response.data.officeId });
+
       locationsContext.addLocation(location);
+      await axios.post(
+        ApiUrls.ADD_FLOORS,
+        JSON.stringify({ floors: floors, officeId: response.data.officeId }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          withCredentials: true,
+        }
+      );
       navigate("/");
     } catch (err) {
       console.error(err);
     }
   };
-
+  const addFloor = (newFloor: Floor) => {
+    newFloor.officeId = location.id;
+    setFloors([...floors, newFloor]);
+  };
   useEffect(() => {
     locationRef.current?.focus();
   }, []);
@@ -118,7 +126,7 @@ const AddLocationForm = () => {
                 {floors.map((floor) => {
                   return (
                     <FloorElement
-                      key={floor.id}
+                      key={floor.name}
                       floor={floor}
                       onClick={async (id) => console.log(id)}
                     />
@@ -137,7 +145,11 @@ const AddLocationForm = () => {
           </section>
         </div>
       </div>
-      <AddFloorModal />
+      <AddFloorModal
+        onSubmit={(e: any) => {
+          addFloor(e);
+        }}
+      />
       );
     </>
   );
