@@ -6,6 +6,8 @@ import { Office } from "../models/Office";
 type ProviderContextType = {
   locations: Office[];
   addLocation: any;
+  selectedLocation: Office;
+  setSelectedLocation: any;
 };
 interface LocationProviderProps {
   children: any;
@@ -15,6 +17,11 @@ export const LocationContext = createContext<ProviderContextType>(null);
 
 export const LocationProvider: FC<LocationProviderProps> = ({ children }) => {
   const [locations, setLocations] = useState<Office[]>([]);
+  const [selectedLocation, setSelectedLocation] = useState<Office>({
+    id: 0,
+    name: "",
+    floors: [],
+  });
   useEffect(() => {
     const getLocations = async () => {
       try {
@@ -30,6 +37,10 @@ export const LocationProvider: FC<LocationProviderProps> = ({ children }) => {
   const ctx: ProviderContextType = {
     locations: locations,
     addLocation: (location: Office) => setLocations([...locations, location]),
+    selectedLocation: selectedLocation,
+    setSelectedLocation: (location: Office) => {
+      setSelectedLocation(location);
+    },
   };
   return (
     <LocationContext.Provider value={ctx}>{children}</LocationContext.Provider>

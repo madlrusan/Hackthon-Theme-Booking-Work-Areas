@@ -5,6 +5,7 @@ import { Avatar, Menu, MenuItem, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import BurgerMenu from "./BurgerMenu";
 import { LocationContext } from "../../../context/LocationProvider";
+import { Office } from "../../../models/Office";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -24,9 +25,12 @@ export const Header = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = (id?: number) => {
+  const handleCloseNavMenu = (floor?: Office) => {
     setAnchorElNav(null);
-    if (id !== undefined) navigate(`/location/${id}`);
+    if (floor !== undefined) {
+      locationContext.setSelectedLocation(floor);
+      navigate(`/location/`);
+    }
   };
 
   const handleCloseUserMenu = () => {
@@ -83,7 +87,7 @@ export const Header = () => {
                       return (
                         <MenuItem
                           key={location.id}
-                          onClick={() => handleCloseNavMenu(location.id)}
+                          onClick={() => handleCloseNavMenu(location)}
                         >
                           <Typography textAlign="center">
                             {location.name}
