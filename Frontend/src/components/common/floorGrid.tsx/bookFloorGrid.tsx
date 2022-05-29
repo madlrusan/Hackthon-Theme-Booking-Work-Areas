@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Desk } from "../../../models/Desk";
 

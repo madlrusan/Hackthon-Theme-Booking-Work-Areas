@@ -1,5 +1,5 @@
-import { Card, List, Stack } from "@mui/material";
-import React from "react";
+import { Card } from "@mui/material";
+
 import { Chart } from "./Chart";
 
 type GraphProps = {

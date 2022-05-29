@@ -8,6 +8,7 @@
 }
 
 .window {
+    height: 500px;
   padding: 10px;
   margin: 5%;
   background-color: #634217 !important;
@@ -47,13 +48,14 @@
   }
 }
 
-@media (max-width: 1361px) {
+@media (max-width: 1200px) {
   .fullscreen {
     height: 100%;
     width: 100%;
     .window {
       padding: 10px;
       margin: 2%;
+      width: 500px;
     }
   }
 }

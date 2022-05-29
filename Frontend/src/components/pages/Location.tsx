@@ -2,35 +2,38 @@ import {
   Card,
   List,
   ListItem,
-  ListItemAvatar,
   ListItemButton,
   ListItemText,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import { LocationContext } from "../../context/LocationProvider";
 import BookFloorGrid from "../common/floorGrid.tsx/bookFloorGrid";
-import FloorGrid from "../common/floorGrid.tsx/floorGrid";
 import { ApiUrls } from "../constants/ApiUrls";
 import "./Location.scss";
 
 const LocationPage = () => {
+  const navigate = useNavigate();
   const { selectedLocation } = useContext(LocationContext);
   const [selectedFloor, setSelectedFloor] = useState(
     selectedLocation.floors[0]
   );
+  const [reservedDays, setReservedDays] = useState(0);
+  const [selectedDeskId, setSelectedDeskId] = useState(0);
+
   useEffect(() => {
     getLocation(selectedLocation?.floors[0]?.id).then((r) => {
       setSelectedFloor(r?.data);
     });
   }, [selectedLocation]);
+  useEffect(() => {
+    getLocation(selectedFloor?.id).then((r) => {
+      setSelectedFloor(r?.data);
+    });
+  }, []);
 
-  const navigate = useNavigate();
-  const [reservedDays, setReservedDays] = useState(0);
-  const [selectedDeskId, setSelectedDeskId] = useState(0);
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async () => {
     try {
       await axios.post(
         ApiUrls.RESERVATION,
@@ -50,37 +53,24 @@ const LocationPage = () => {
     getLocation(floorID).then((r) => {
       setSelectedFloor(r?.data);
     });
-    // setSelectedFloor(floor);
   };
 
-  useEffect(() => {
-    getLocation(selectedFloor?.id).then((r) => {
-      setSelectedFloor(r?.data);
-    });
-  }, []);
-  // const filter = (e: any) => {
-  //   const keyword = e.target.value;
-  //   if (keyword !== "") {
-  //     const results = Floors.filter((floor) => {
-  //       return floor.name.toLowerCase().startsWith(keyword.toLowerCase());
-  //     });
-  //     setFoundLocation(results);
-  //   } else {
-  //     setFoundLocation(Floors);
-  //   }
-  //   setLocationName(keyword);
-  // };
   return (
     <div className="fullscreen">
       <Card className="window">
         <div>
           <h1>{selectedLocation.name}</h1>
           <div className="scrollable-list">
-            {/* we need search bar and filter buttons */}
             <List>
               {selectedLocation.floors.map((floor) => (
-                <ListItem key={floor.id} onClick={() => onFloorClick(floor.id)}>
-                  <ListItemButton style={{ backgroundColor: "#4a3211" }}>
+                <ListItem
+                  key={floor.id}
+                  onClick={() => onFloorClick(floor.id)}
+                  style={{ width: "500px" }}
+                >
+                  <ListItemButton
+                    style={{ backgroundColor: "#4a3211", borderRadius: "10%" }}
+                  >
                     <ListItemText>{floor.name}</ListItemText>
                   </ListItemButton>
                 </ListItem>
@@ -109,7 +99,7 @@ const LocationPage = () => {
             <button
               style={{ marginTop: "20px" }}
               disabled={selectedDeskId === 0 && reservedDays === 0}
-              onClick={(e) => onSubmit(e)}
+              onClick={() => onSubmit()}
             >
               Book desk
             </button>

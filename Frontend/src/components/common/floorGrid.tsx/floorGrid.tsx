@@ -1,7 +1,6 @@
-import React, { FC, useEffect, useState } from "react";
-import styled from "styled-components";
+import { FC, useEffect, useState } from "react";
 import "./floorGrid.scss";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { Grid } from "@mui/material";
 
 type FloorGridProps = {
@@ -21,6 +20,7 @@ export type deskCoordinates = {
 };
 const Item: FC<ItemProps> = ({ row, column, bookDesk, bookedDesks }) => {
   const [isBooked, setIsBooked] = useState<Boolean | null>();
+
   useEffect(() => {
     const booked = bookedDesks.filter((desk) => {
       return desk.row === row && desk.column === column;
@@ -47,6 +47,8 @@ const Item: FC<ItemProps> = ({ row, column, bookDesk, bookedDesks }) => {
 
 const FloorGrid = (props: FloorGridProps) => {
   const [bookedDesks, setBookedDesks] = useState<deskCoordinates[]>([]);
+  const { rows, columns, saveDesks } = props;
+
   const bookDesk = (isBooked: boolean, row: number, column: number) => {
     if (isBooked) {
       const newBookedDesks = bookedDesks.filter((desk) => {
@@ -57,7 +59,7 @@ const FloorGrid = (props: FloorGridProps) => {
       setBookedDesks([...bookedDesks, { row, column }]);
     }
   };
-  const { rows, columns, saveDesks } = props;
+
   const renderColumns = (row: number, columns: number) => {
     let columnComponents: any = [];
     for (let i = 0; i < columns; i++) {

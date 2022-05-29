@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useContext } from "react";
+import { useRef, useState, useEffect } from "react";
 import "../common/styles/authentication.scss";
 import axios from "../../api/axios";
 import { ApiUrls } from "../constants/ApiUrls";
@@ -8,9 +8,12 @@ import { parseJwt } from "../constants/jwtParsers";
 
 export const Login = () => {
   const navigate = useNavigate();
+
   const authenticationContext = useAuth();
+
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
+
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
@@ -23,14 +26,13 @@ export const Login = () => {
       setIsValid(true);
     }
   }, [email, pwd]);
-
   useEffect(() => {
     userRef.current?.focus();
   }, []);
-
   useEffect(() => {
     setErrMsg("");
   }, [email, pwd]);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {

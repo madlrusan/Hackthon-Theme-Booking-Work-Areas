@@ -7,16 +7,16 @@ import { AddFloorModal } from "./AddFloorModal";
 import axios from "../../api/axios";
 import { ApiUrls } from "../constants/ApiUrls";
 import { Office } from "../../models/Office";
-import {
-  LocationContext,
-  LocationProvider,
-} from "../../context/LocationProvider";
+import { LocationContext } from "../../context/LocationProvider";
 import { Navigate, useNavigate } from "react-router-dom";
 const AddLocationForm = () => {
   const navigate = useNavigate();
-  const locationRef = useRef<HTMLInputElement>(null);
+
   const modalsContext = useContext(ModalsContext);
   const locationsContext = useContext(LocationContext);
+
+  const locationRef = useRef<HTMLInputElement>(null);
+
   const [location, setLocation] = useState<Office>({
     id: 0,
     name: "",
@@ -24,17 +24,25 @@ const AddLocationForm = () => {
   });
   const [locationFocus, setLocationFocus] = useState(false);
   const [locationValid, setLocationValid] = useState(false);
-  const [rows, setRows] = useState(0);
-  const [columns, setColumns] = useState(0);
-
   const [floors, setFloors] = useState<Floor[]>([]);
+
   useEffect(() => {
     const roles = localStorage.getItem("role")?.split(",");
     if (!roles?.includes("Manager")) navigate("/");
   }, []);
+
+  useEffect(() => {
+    locationRef.current?.focus();
+  }, []);
+  useEffect(() => {
+    if (location.name.length > 0 && floors.length > 0) setLocationValid(true);
+    else setLocationValid(false);
+  }, [location.name, floors]);
+
   const addNewFloor = () => {
     modalsContext.setAddFloorOpen(true);
   };
+
   const onSubmit = async () => {
     try {
       const response = await axios.post(
@@ -71,6 +79,7 @@ const AddLocationForm = () => {
       console.error(err);
     }
   };
+
   const addFloor = (newFloor: Floor, rows: number, columns: number) => {
     newFloor.officeId = location.id;
     newFloor.rows = rows;
@@ -78,13 +87,6 @@ const AddLocationForm = () => {
     console.log(newFloor);
     setFloors([...floors, newFloor]);
   };
-  useEffect(() => {
-    locationRef.current?.focus();
-  }, []);
-  useEffect(() => {
-    if (location.name.length > 0 && floors.length > 0) setLocationValid(true);
-    else setLocationValid(false);
-  }, [location.name, floors]);
   return (
     <>
       <div className="fullscreen">

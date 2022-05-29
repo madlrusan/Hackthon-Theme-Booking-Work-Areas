@@ -3,21 +3,21 @@ import "./header.scss";
 
 import { Avatar, Menu, MenuItem, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import BurgerMenu from "./BurgerMenu";
 import { LocationContext } from "../../../context/LocationProvider";
 import { Office } from "../../../models/Office";
 
 export const Header = () => {
   const navigate = useNavigate();
+
   const locationContext = useContext(LocationContext);
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
-
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };

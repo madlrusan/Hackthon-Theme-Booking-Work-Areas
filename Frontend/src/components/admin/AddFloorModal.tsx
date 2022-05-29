@@ -1,4 +1,4 @@
-import { Box, Modal, Typography } from "@mui/material";
+import { Modal } from "@mui/material";
 import { FC, useContext, useEffect, useState } from "react";
 import { ModalsContext } from "../../context/ModalProvider";
 import { Desk } from "../../models/Desk";
@@ -18,6 +18,7 @@ export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
   const [rows, setRows] = useState(0);
   const [columns, setColumns] = useState(0);
   const [isValid, setIsValid] = useState(false);
+
   useEffect(() => {
     if (rows === 0 || columns === 0 || desks.length === 0 || floorName === "")
       setIsValid(false);
@@ -44,6 +45,7 @@ export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
     }
     setDesks(desksList);
   };
+
   const saveFloor = () => {
     const floor: Floor = {
       id: 0,
@@ -55,6 +57,7 @@ export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
     };
     return floor;
   };
+
   const handleSubmit = () => {
     modalsContext.setAddFloorOpen(false);
     const returnedValue = saveFloor();
