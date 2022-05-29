@@ -40,3 +40,10 @@ button {
         color: #003973;
         border-color: #003973;
 }
+
+button:disabled{
+    background-color: #00000021 !important;
+    color: black;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+    
+}
