@@ -39,6 +39,8 @@ namespace ITEC.Backend.Application.Commands.CreateFloorsCmd
                                 CreatedAtTimeUtc = DateTime.UtcNow,
                                 CreatedByUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier),
                                 Name = c.Name,
+                                Rows = c.Rows,
+                                Columns = c.Columns,
                                 Desks = c.Desks.Select((desk, index) => new Desk()
                                     {
                                         CreatedAtTimeUtc = DateTime.UtcNow,
