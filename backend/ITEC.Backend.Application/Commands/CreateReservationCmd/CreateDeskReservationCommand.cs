@@ -10,6 +10,6 @@ namespace ITEC.Backend.Application.Commands.CreateReservationCmd
     public class CreateDeskReservationCommand : IRequest<CreateDeskReservationCommandResult>
     {
         public int DeskId { get; set; }
-        public DateTime ReservationDate { get; set; }
+        public int NumberOfDays { get; set; }
     }
 }

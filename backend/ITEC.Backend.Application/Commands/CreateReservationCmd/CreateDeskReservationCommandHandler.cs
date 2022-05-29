@@ -48,24 +48,33 @@ namespace ITEC.Backend.Application.Commands.CreateReservationCmd
 
             var deskReservations = await _deskReservationRepository.GetFutureReservationsForDesk(request.DeskId);
 
-            if (deskReservations.Any(p => new DateTime(p.ReservationDate.Year, p.ReservationDate.Month, p.ReservationDate.Day) == new DateTime(request.ReservationDate.Year, request.ReservationDate.Month, request.ReservationDate.Day)))
+            var tomorrowDate = DateTime.Now.AddDays(1);
+
+            if (deskReservations.Any(p => new DateTime(p.ReservationDate.Year, p.ReservationDate.Month, p.ReservationDate.Day) == new DateTime(tomorrowDate.Year, tomorrowDate.Month, tomorrowDate.Day)))
                 throw new ValidationException("Desk already reserved!");
 
-            var reservation = new DeskReservation()
+            List<DeskReservation> reservations = new List<DeskReservation>();
+            for(int i = 0; i<request.NumberOfDays; i++)
             {
-                DeskId = request.DeskId,
-                CreatedAtTimeUtc = DateTime.UtcNow,
-                ReservationDate = new DateTime(request.ReservationDate.Year, request.ReservationDate.Month, request.ReservationDate.Day),
-                CreatedByUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)
-            };
+                var date = tomorrowDate.AddDays(i);
+                var reservation = new DeskReservation()
+                {
+                    DeskId = request.DeskId,
+                    CreatedAtTimeUtc = DateTime.UtcNow,
+                    ReservationDate = new DateTime(date.Year, date.Month, date.Day),
+                    CreatedByUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)
+                };
+                reservations.Add(reservation);
+            }
+            
 
-            await _deskReservationRepository.AddAsync(reservation);
+            await _deskReservationRepository.AddRangeAsync(reservations);
 
             var emailNotification = new SendEmailCommand()
             {
                 Receiver = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email),
                 Subject = "Desk reservation confirmation",
-                Body = @$"<h3>Hello,</h3><p>We want to let you know you've booked the desk <b>{desk.Name}</b> for <b>{request.ReservationDate.ToString("dddd, dd MMMM yyyy")}</b><p>Cheers and see you there!</p>"
+                Body = @$"<h3>Hello,</h3><p>We want to let you know you've booked the desk <b>{desk.Name}</b> for <b>{request.NumberOfDays}</b> days starting with <b>{tomorrowDate.ToString("dddd, dd MMMM yyyy")}</b><p>Cheers and see you there!</p>"
             };
             await _mediator.Publish(emailNotification);
             return new CreateDeskReservationCommandResult();

@@ -14,10 +14,8 @@ namespace ITEC.Backend.Application.Commands.CreateReservationCmd
             RuleFor(x => x.DeskId).NotNull().NotEqual(0)
                 .WithMessage("DeskId cannot be null or 0!");
 
-            RuleFor(x => x.ReservationDate)
-                .NotNull()
-                .GreaterThan(DateTime.Now)
-                .WithMessage("ReservationDate cannot be null or in the past!");
+            RuleFor(x => x.NumberOfDays).NotNull().GreaterThan(0)
+                .WithMessage("NumberOfDays cannot be null or smaller than 1!");
         }
     }
 }
