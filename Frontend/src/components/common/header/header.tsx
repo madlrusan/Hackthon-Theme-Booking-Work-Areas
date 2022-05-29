@@ -28,8 +28,9 @@ export const Header = () => {
   const handleCloseNavMenu = (floor?: Office) => {
     setAnchorElNav(null);
     if (floor !== undefined) {
+      console.log(floor);
       locationContext.setSelectedLocation(floor);
-      navigate(`/location/`);
+      navigate(`/location`);
     }
   };
 

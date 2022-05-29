@@ -90,6 +90,7 @@ const LocationPage = () => {
                 onChange={(e) => setReservedDays(parseInt(e.target.value))}
               />
             </div>
+
             <button
               style={{ marginTop: "20px" }}
               disabled={selectedDeskId === 0}

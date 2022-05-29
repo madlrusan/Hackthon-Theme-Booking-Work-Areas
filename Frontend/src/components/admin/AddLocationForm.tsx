@@ -55,7 +55,7 @@ const AddLocationForm = () => {
       );
       setLocation({ ...location, id: response.data.officeId });
 
-      locationsContext.addLocation(location);
+      locationsContext.getLocations();
 
       await axios.post(
         ApiUrls.ADD_FLOORS,
