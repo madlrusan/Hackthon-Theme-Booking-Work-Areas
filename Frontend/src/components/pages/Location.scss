@@ -10,44 +10,60 @@
 .window {
   padding: 10px;
   margin: 5%;
-  background-color: #c4dbf4 !important;
+  background-color: #634217 !important;
   display: grid;
   grid-template-columns: 50% 50%;
-  h1{
-      position: sticky;
-      top: 0;
+  h1 {
+    position: sticky;
+    top: 0;
   }
-  .scrollable-list{
-    height:70%;
-    margin-top:10px;
+  .scrollable-list {
+    height: 70%;
+    margin-top: 10px;
     overflow: auto;
   }
   .floor-content {
-      margin-top:10px
+    margin-top: 10px;
   }
-
-
+}
+.statisticsBox {
+  padding: 10px;
+  margin: 5%;
+  background-color: rgba(0, 0, 0, 0) !important;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  box-shadow: 0 !important;
+  h1 {
+    position: sticky;
+    top: 0;
+  }
+  .scrollable-list {
+    height: 70%;
+    margin-top: 10px;
+    overflow: auto;
+  }
+  .floor-content {
+    margin-top: 10px;
+  }
 }
 
 @media (max-width: 1361px) {
   .fullscreen {
     height: 100%;
     width: 100%;
-    .window{
-    padding: 10px;
-    margin: 2%;
+    .window {
+      padding: 10px;
+      margin: 2%;
     }
-    
   }
 }
 
 .MuiTypography-root {
-    color: #003973;
+  color: #fff5b6;
 }
 
-button:disabled{
-    background-color:#00000021 !important;
-    color: black;
-    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
-    
+button:disabled {
+  background-color: #00000021 !important;
+  color: black;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
 }

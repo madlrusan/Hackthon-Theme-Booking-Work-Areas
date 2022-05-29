@@ -2,18 +2,18 @@
 $breakpoint: 280px;
 
 .form {
-    color:red;
+  color: red;
   padding: 10% 25%;
   margin: 0% -25% 10% 10%;
   .addFloor {
     font-family: "Nunito", sans-serif;
     font-size: 15px;
-    color: #003973;
+    color: #fff5b6;
     border-radius: 5%;
     max-height: 55rem;
-    background-color:#c4dbf4;
+    background-color: #634217;
     height: 55rem;
-    margin-top:-10rem;
+    margin-top: -7vh;
     .errmsg {
       background-color: lightpink;
       color: firebrick;
@@ -29,7 +29,7 @@ $breakpoint: 280px;
       font-size: 0.75rem;
       border-radius: 0.5rem;
       background: #3b3030;
-      color: #c4dbf4 ;
+      color: #634217;
       padding: 0.25rem;
       margin-top: 0.25rem;
     }
@@ -40,7 +40,7 @@ $breakpoint: 280px;
       label {
         display: flex;
         align-items: center;
-        color: #003973;
+        color: #fff5b6;
       }
       .instructions > svg {
         margin-right: 0.25rem;
@@ -70,11 +70,10 @@ $breakpoint: 280px;
         font-size: 15px;
         padding: 0.25rem;
         border-radius: 0.5rem;
-        outline-color: #003973;
-        border-color: #003973;
-        color: #003973;
+        outline-color: #080703;
+        border-color: #080703;
+        color: #080703;
       }
-
     }
     h1 {
       color: rgb(223 234 246);
@@ -91,19 +90,19 @@ $breakpoint: 280px;
     flex-direction: column;
     justify-content: flex-start;
     padding: 1rem;
-    background-color: #c4dbf4;
+    background-color: #634217;
   }
   .btn {
     display: flex;
     justify-content: flex-end;
     margin-top: 10px;
     width: 50% !important;
-    margin-left: 50%;
+    // margin-left: 50%;
     margin-bottom: 35px;
     &.button-modal-prim {
       padding-right: 25px !important;
       border-radius: 0.5rem;
-      background: #c4dbf4;
+      background: rgba(64, 68, 71);
       width: 50%;
       font-size: 15px;
       margin-top: 10px;
@@ -140,7 +139,6 @@ $breakpoint: 280px;
   padding: 1rem 0.5rem;
 }
 
-
 @media (max-width: 1024px) {
   .fullscreen {
     height: 100%;
@@ -176,12 +174,11 @@ $breakpoint: 280px;
   }
 }
 .field-adding {
-    margin-top:10px;
+  margin-top: 10px;
 }
 
-button:disabled{
-    background-color: #00000021 !important;
-    color: black;
-    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
-    
+button:disabled {
+  background-color: #00000021 !important;
+  color: black;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
 }

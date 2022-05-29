@@ -92,6 +92,12 @@ const FloorGrid = (props: FloorGridProps) => {
   };
   return (
     <div style={{ padding: "10px 20px" }}>
+      <button
+        className="btn button-form"
+        onClick={() => saveDesks(bookedDesks)}
+      >
+        Save desks
+      </button>
       <Grid
         container
         className="grid-container"
@@ -99,9 +105,7 @@ const FloorGrid = (props: FloorGridProps) => {
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
         {renderRows(rows, columns)}
-        
       </Grid>
-      <button onClick={() => saveDesks(bookedDesks)}>Save desks</button>
     </div>
   );
 };

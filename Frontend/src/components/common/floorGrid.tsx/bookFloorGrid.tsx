@@ -84,7 +84,7 @@ const BookFloorGrid: FC<BookFloorGridProps> = ({
     return rowComponents;
   };
   return (
-    <div style={{ padding: "10px 20px" }}>
+    <div style={{ padding: "10px 20px", margin: "70px 0px 0px 10px" }}>
       <Grid
         container
         className="grid-container"

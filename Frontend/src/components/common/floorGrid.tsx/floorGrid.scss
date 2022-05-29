@@ -16,7 +16,7 @@
   border: 1px solid black !important;
   width: 30px !important;
   height: 30px !important;
-  background-color: #bfd2e0 !important;
+  background-color: #3f4448 !important;
   border-style: solid !important;
   margin: 5px;
   border-radius: 15%;
@@ -33,20 +33,19 @@
   background-color: green !important;
 }
 button {
-    font-family: "Nunito", sans-serif;
-        font-size: 15px;
-        padding: 0.25rem;
-        border-radius: 0.5rem;
-        outline-color: #003973;
-        background-color: #c4dbf4 ;
-        margin-top: -35px;
-        color: #003973;
-        border-color: #003973;
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  outline-color: #080703;
+  background-color: #634217;
+  margin-top: -35px;
+  color: #080703;
+  border-color: #080703;
 }
 
-button:disabled{
-    background-color: #00000021 !important;
-    color: black;
-    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
-    
+button:disabled {
+  background-color: #00000021 !important;
+  color: black;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
 }

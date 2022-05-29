@@ -1,14 +1,26 @@
-
 html,
 body {
-  background-color: #3c5c7d;
+  background-color: #fff5b6;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
 h1 {
-  color: #003973;
+  color: #efc070;
 }
-button:disabled{
-    background-color: #00000021 !important;
-    color: black;
+
+button:hover {
+  background-color: #f18339 !important;
+  color: black !important;
+}
+button:disabled {
+  background-color: rgb(63, 68, 72, 0.3) !important;
+  color: #efc070 !important;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+  &:hover {
+    background-color: rgb(63, 68, 72, 0.3) !important;
+    color: #efc070;
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
-    
+  }
 }

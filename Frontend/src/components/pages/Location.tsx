@@ -20,6 +20,12 @@ const LocationPage = () => {
   const [selectedFloor, setSelectedFloor] = useState(
     selectedLocation.floors[0]
   );
+  useEffect(() => {
+    getLocation(selectedLocation?.floors[0]?.id).then((r) => {
+      setSelectedFloor(r?.data);
+    });
+  }, [selectedLocation]);
+
   const navigate = useNavigate();
   const [reservedDays, setReservedDays] = useState(0);
   const [selectedDeskId, setSelectedDeskId] = useState(0);
@@ -48,7 +54,7 @@ const LocationPage = () => {
   };
 
   useEffect(() => {
-    getLocation(selectedFloor.id).then((r) => {
+    getLocation(selectedFloor?.id).then((r) => {
       setSelectedFloor(r?.data);
     });
   }, []);
@@ -74,7 +80,7 @@ const LocationPage = () => {
             <List>
               {selectedLocation.floors.map((floor) => (
                 <ListItem key={floor.id} onClick={() => onFloorClick(floor.id)}>
-                  <ListItemButton>
+                  <ListItemButton style={{ backgroundColor: "#4a3211" }}>
                     <ListItemText>{floor.name}</ListItemText>
                   </ListItemButton>
                 </ListItem>
@@ -83,29 +89,40 @@ const LocationPage = () => {
           </div>
           <form>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <label htmlFor="daysNr">How many days you want to book?</label>
+              <label style={{ color: "#efc070" }} htmlFor="daysNr">
+                How many days you want to book?
+              </label>
               <input
                 id="daysNr"
                 type="number"
-                onChange={(e) => setReservedDays(parseInt(e.target.value))}
+                style={{ width: "100px" }}
+                onChange={(e) => {
+                  const value = parseInt(e.target.value);
+                  if (value === null) setReservedDays(0);
+                  else {
+                    setReservedDays(value);
+                  }
+                }}
               />
             </div>
 
             <button
               style={{ marginTop: "20px" }}
-              disabled={selectedDeskId === 0}
+              disabled={selectedDeskId === 0 && reservedDays === 0}
               onClick={(e) => onSubmit(e)}
             >
               Book desk
             </button>
           </form>
         </div>
-        <BookFloorGrid
-          rows={selectedFloor.rows}
-          columns={selectedFloor.columns}
-          desks={selectedFloor.desks}
-          saveDesk={(id: number) => setSelectedDeskId(id)}
-        />
+        {selectedFloor !== undefined && (
+          <BookFloorGrid
+            rows={selectedFloor.rows}
+            columns={selectedFloor.columns}
+            desks={selectedFloor.desks}
+            saveDesk={(id: number) => setSelectedDeskId(id)}
+          />
+        )}
       </Card>
     </div>
   );

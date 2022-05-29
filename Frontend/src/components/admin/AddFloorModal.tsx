@@ -95,38 +95,37 @@ export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
               </div>
             </div>
             <div className="formField">
-            <label htmlFor="deskRow">Desk rows:     </label>
-            <input
-              type="number"
-              id="deskRow"
-              min="0"
-              max="10"
-              value={rows}
-              onChange={(e) => {
-                const value = parseInt(e.target.value);
-                if (value > 10) setRows(10);
-                else if (value < 0) setRows(1);
-                else setRows(value);
-              }}
-            />
+              <label htmlFor="deskRow">Desk rows: </label>
+              <input
+                type="number"
+                id="deskRow"
+                min="0"
+                max="10"
+                value={rows}
+                onChange={(e) => {
+                  const value = parseInt(e.target.value);
+                  if (value > 10) setRows(10);
+                  else if (value < 0) setRows(1);
+                  else setRows(value);
+                }}
+              />
             </div>
             <div className="formField">
-            <label htmlFor="deskColumn">Desk columns: </label>
-            <input
-              value={columns}
-              type="number"
-              id="deskColumn"
-              min="0"
-              max="10"
-              onChange={(e) => {
-                const value = parseInt(e.target.value);
-                if (value > 10) setColumns(10);
-                else if (value < 0) setColumns(1);
-                else setColumns(value);
-              }}
-            />
+              <label htmlFor="deskColumn">Desk columns: </label>
+              <input
+                value={columns}
+                type="number"
+                id="deskColumn"
+                min="0"
+                max="10"
+                onChange={(e) => {
+                  const value = parseInt(e.target.value);
+                  if (value > 10) setColumns(10);
+                  else if (value < 0) setColumns(1);
+                  else setColumns(value);
+                }}
+              />
             </div>
-            
           </form>
           <FloorGrid
             rows={rows}
@@ -135,15 +134,14 @@ export const AddFloorModal: FC<AddFloorModalProps> = ({ onSubmit }) => {
               populateDesks(hoteledDesks);
             }}
           />
-          <div className="btn">
-              <button
-            className="submitFormButton"
+
+          <button
+            className="btn button-form"
             disabled={!isValid}
             onClick={() => handleSubmit()}
           >
             Save floor
           </button>
-          </div>
         </section>
       </Modal>
     </div>

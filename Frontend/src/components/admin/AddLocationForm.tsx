@@ -1,5 +1,3 @@
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Floor } from "../../models/Floor";
 import { FloorElement } from "./FloorElement";
@@ -28,10 +26,7 @@ const AddLocationForm = () => {
   const [locationValid, setLocationValid] = useState(false);
   const [rows, setRows] = useState(0);
   const [columns, setColumns] = useState(0);
-  useEffect(() => {
-    if (location.name.length > 0) setLocationValid(true);
-    else setLocationValid(false);
-  });
+
   const [floors, setFloors] = useState<Floor[]>([]);
   useEffect(() => {
     const roles = localStorage.getItem("role")?.split(",");
@@ -55,7 +50,7 @@ const AddLocationForm = () => {
       );
       setLocation({ ...location, id: response.data.officeId });
 
-      locationsContext.getLocations();
+      locationsContext.addLocation(location);
 
       await axios.post(
         ApiUrls.ADD_FLOORS,
@@ -86,6 +81,10 @@ const AddLocationForm = () => {
   useEffect(() => {
     locationRef.current?.focus();
   }, []);
+  useEffect(() => {
+    if (location.name.length > 0 && floors.length > 0) setLocationValid(true);
+    else setLocationValid(false);
+  }, [location.name, floors]);
   return (
     <>
       <div className="fullscreen">
@@ -94,17 +93,7 @@ const AddLocationForm = () => {
             <h1>Add new office</h1>
             <form>
               <div className="formField">
-                <label htmlFor="location">
-                  Location
-                  <FontAwesomeIcon
-                    icon={faCheck}
-                    className={locationValid ? "valid" : "hide"}
-                  />
-                  <FontAwesomeIcon
-                    icon={faTimes}
-                    className={locationValid ? "hide" : "invalid"}
-                  />
-                </label>
+                <label htmlFor="location">Location</label>
                 <input
                   type="text"
                   id="location"

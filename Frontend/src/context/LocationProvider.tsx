@@ -8,7 +8,6 @@ type ProviderContextType = {
   addLocation: any;
   selectedLocation: Office;
   setSelectedLocation: any;
-  getLocations: any;
 };
 interface LocationProviderProps {
   children: any;
@@ -23,16 +22,17 @@ export const LocationProvider: FC<LocationProviderProps> = ({ children }) => {
     name: "",
     floors: [],
   });
-  const getLocations = async () => {
-    try {
-      const response = await axios.get(ApiUrls.GET_OFFICES_WITH_FLOORS);
 
-      setLocations(response.data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
   useEffect(() => {
+    const getLocations = async () => {
+      try {
+        const response = await axios.get(ApiUrls.GET_OFFICES_WITH_FLOORS);
+
+        setLocations(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
     getLocations().then();
   }, []);
   const ctx: ProviderContextType = {
@@ -42,7 +42,6 @@ export const LocationProvider: FC<LocationProviderProps> = ({ children }) => {
     setSelectedLocation: (location: Office) => {
       setSelectedLocation(location);
     },
-    getLocations: () => getLocations().then(),
   };
   return (
     <LocationContext.Provider value={ctx}>{children}</LocationContext.Provider>

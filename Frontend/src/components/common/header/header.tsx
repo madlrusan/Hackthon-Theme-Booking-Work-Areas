@@ -28,14 +28,15 @@ export const Header = () => {
   const handleCloseNavMenu = (floor?: Office) => {
     setAnchorElNav(null);
     if (floor !== undefined) {
-      console.log(floor);
       locationContext.setSelectedLocation(floor);
       navigate(`/location`);
     }
   };
-
   const handleCloseUserMenu = () => {
-    localStorage.removeItem("token");
+    setAnchorElUser(null);
+  };
+  const handleLogout = () => {
+    localStorage.clear();
     navigate("/login");
     setAnchorElUser(null);
   };
@@ -92,7 +93,7 @@ export const Header = () => {
                         >
                           <Typography
                             textAlign="center"
-                            style={{ color: "#003973" }}
+                            style={{ color: "#080703" }}
                           >
                             {location.name}
                           </Typography>
@@ -130,14 +131,14 @@ export const Header = () => {
                       vertical: "top",
                       horizontal: "right",
                     }}
-                    open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
+                    open={Boolean(anchorElUser)}
                     className="log-out"
                   >
-                    <MenuItem onClick={handleCloseUserMenu} className="log-out">
+                    <MenuItem onClick={handleLogout} className="log-out">
                       <Typography
                         textAlign="center"
-                        style={{ color: "#003973" }}
+                        style={{ color: "#080703" }}
                       >
                         Logout
                       </Typography>

@@ -15,18 +15,33 @@ const App = () => {
   }, []);
 
   return (
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="/" element={<RequireAuthentication />}>
-            <Route path="addLocation" element={<AddLocationForm />} />
-            <Route path="location" element={<LocationPage />} />
-            <Route path="statistics" element={<Statistics />} />
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="/" element={<RequireAuthentication />}>
+          <Route
+            path="/"
+            element={
+              <div
+                style={{
+                  fontSize: "50px",
+                  color: "#634217",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "250px",
+                }}
+              >
+                WELCOME!
+              </div>
+            }
+          />
+          <Route path="addLocation" element={<AddLocationForm />} />
+          <Route path="location" element={<LocationPage />} />
+          <Route path="statistics" element={<Statistics />} />
         </Route>
-        </Route>
-      </Routes>
-
+      </Route>
+    </Routes>
   );
 };
 

@@ -3,9 +3,9 @@
 $content-width: 1000px;
 $breakpoint: 799px;
 $nav-height: 40px;
-$nav-background: #c4dbf4;
-$nav-font-color: #003973;
-$link-hover-color: #3c5c7d6f;//#fcfcfc;
+$nav-background: #634217;
+$nav-font-color: #efc070;
+$link-hover-color: #fff5b66f; //#fcfcfc;
 $link-hover-text: #fcfcfc;
 
 // Outer navigation wrapper
@@ -193,24 +193,29 @@ article {
 }
 
 MuiTypography-root {
-    color: #003973;
+  color: #080703;
 }
 ul.MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list {
-    height: 200px;
-    max-height: 20%;
-    overflow: scroll;
+  height: 200px;
+  max-height: 20%;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
-.log-out{
-   ul.MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list
-    {
+
+.log-out {
+  ul.MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list {
     height: 50px;
     max-height: 20%;
-    overflow: scroll;
+    overflow: hidden;
+    &::-webkit-scrollbar {
+      display: none;
     }
+  }
 }
-button:disabled{
-    background-color: #00000021 !important;
-    color: black;
-    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
-    
+button:disabled {
+  background-color: #00000021 !important;
+  color: black;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
 }
