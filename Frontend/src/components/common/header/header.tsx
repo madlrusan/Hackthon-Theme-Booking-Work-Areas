@@ -132,8 +132,9 @@ export const Header = () => {
                     }}
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
+                    className="log-out"
                   >
-                    <MenuItem onClick={handleCloseUserMenu}>
+                    <MenuItem onClick={handleCloseUserMenu} className="log-out">
                       <Typography
                         textAlign="center"
                         style={{ color: "#003973" }}

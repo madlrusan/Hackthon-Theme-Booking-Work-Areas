@@ -8,7 +8,7 @@ import { Header } from "./components/common/header/header";
 import { AuthProvider } from "./context/AuthProvider";
 import { LocationProvider } from "./context/LocationProvider";
 import { ModalsProvider } from "./context/ModalProvider";
-import "./styles.css";
+import "./styles.scss";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

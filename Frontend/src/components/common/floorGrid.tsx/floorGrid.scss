@@ -33,13 +33,20 @@
   background-color: green !important;
 }
 button {
-  font-family: "Nunito", sans-serif;
-  font-size: 15px;
-  padding: 0.25rem;
-  border-radius: 0.5rem;
-  outline-color: #003973;
-  background-color: #c4dbf4;
-  margin-top: -35px;
-  color: #003973;
-  border-color: #003973;
+    font-family: "Nunito", sans-serif;
+        font-size: 15px;
+        padding: 0.25rem;
+        border-radius: 0.5rem;
+        outline-color: #003973;
+        background-color: #c4dbf4 ;
+        margin-top: -35px;
+        color: #003973;
+        border-color: #003973;
+}
+
+button:disabled{
+    background-color: #00000021 !important;
+    color: black;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+    
 }

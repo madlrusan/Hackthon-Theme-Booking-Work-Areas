@@ -200,3 +200,17 @@ ul.MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-lis
     max-height: 20%;
     overflow: scroll;
 }
+.log-out{
+   ul.MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list
+    {
+    height: 50px;
+    max-height: 20%;
+    overflow: scroll;
+    }
+}
+button:disabled{
+    background-color: #00000021 !important;
+    color: black;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+    
+}
