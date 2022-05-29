@@ -6,4 +6,5 @@ export const ApiUrls = {
   ADD_OFFICE: "/api/office",
   GET_OFFICES_WITH_FLOORS: "/api/office?includeFloors=true",
   ADD_FLOORS: "/api/floor",
+  GET_FLOORBYID: "/api/floor/",
 };
