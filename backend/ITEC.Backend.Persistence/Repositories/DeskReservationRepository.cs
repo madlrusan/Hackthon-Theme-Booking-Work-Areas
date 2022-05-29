@@ -16,7 +16,14 @@ namespace ITEC.Backend.Persistence.Repositories
 
         public async Task<List<DeskReservation>> GetFutureReservationsForDesk(int deskId)
         {
-            return await _dbContext.Set<DeskReservation>().Where(p => p.DeskId == deskId && p.ReservationDate >= DateTime.Now).ToListAsync();
+            var tomorrowDate = DateTime.Now.AddDays(1);
+            return await _dbContext.Set<DeskReservation>().Where(p => p.DeskId == deskId && p.ReservationDate >= new DateTime(tomorrowDate.Year, tomorrowDate.Month, tomorrowDate.Day)).ToListAsync();
+        }
+
+        public async Task<List<DeskReservation>> GetFutureReservationsForUser(string userId)
+        {
+            var tomorrowDate = DateTime.Now.AddDays(1);
+            return await _dbContext.Set<DeskReservation>().OrderBy(p => p.ReservationDate).Where(p => p.CreatedByUserId == userId && p.ReservationDate >= new DateTime(tomorrowDate.Year, tomorrowDate.Month, tomorrowDate.Day)).ToListAsync();
         }
     }
 }
