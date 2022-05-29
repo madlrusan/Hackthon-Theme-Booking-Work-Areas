@@ -13,30 +13,33 @@
 //     offset: 10px;
 // }
 .desk {
-    border: 1px solid black !important;
-    width: 30px !important;
-    height: 30px !important;
-    background-color: #bfd2e0 !important;
-    border-style: solid !important;
-    margin: 5px;
-    border-radius: 15%;
-    text-align: center;
-    align-content: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  border: 1px solid black !important;
+  width: 30px !important;
+  height: 30px !important;
+  background-color: #bfd2e0 !important;
+  border-style: solid !important;
+  margin: 5px;
+  border-radius: 15%;
+  text-align: center;
+  align-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .booked {
   background-color: red !important;
 }
+.reserved {
+  background-color: green !important;
+}
 button {
-    font-family: "Nunito", sans-serif;
-        font-size: 15px;
-        padding: 0.25rem;
-        border-radius: 0.5rem;
-        outline-color: #003973;
-        background-color: #c4dbf4 ;
-        margin-top: -35px;
-        color: #003973;
-        border-color: #003973;
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  outline-color: #003973;
+  background-color: #c4dbf4;
+  margin-top: -35px;
+  color: #003973;
+  border-color: #003973;
 }

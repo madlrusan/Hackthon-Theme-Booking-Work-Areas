@@ -7,23 +7,27 @@ interface BookFloorGridProps {
   desks: Desk[];
   rows: number;
   columns: number;
+  saveDesk: any;
 }
 interface ItemProps {
   desk: Desk | undefined;
+  onClick: any;
+  isRes: boolean;
 }
-const Item: FC<ItemProps> = ({ desk }) => {
-  const [isBooked, setIsBooked] = useState<Boolean | null>(
-    desk?.reserved || desk?.isHotelingDesk || false
-  );
-
-  const bookDesk = () => {};
+const Item: FC<ItemProps> = ({ desk, isRes, onClick }) => {
   return (
     <div
-      className={isBooked === true ? " desk booked" : "desk"}
+      className={
+        desk?.reserved || desk?.isHotelingDesk
+          ? "desk booked"
+          : isRes
+          ? "desk reserved"
+          : "desk"
+      }
       onClick={() => {
-        if (isBooked) {
+        if (desk?.reserved || desk?.isHotelingDesk) {
         } else {
-          bookDesk();
+          onClick();
         }
       }}
     >
@@ -31,20 +35,35 @@ const Item: FC<ItemProps> = ({ desk }) => {
     </div>
   );
 };
-const BookFloorGrid: FC<BookFloorGridProps> = ({ desks, rows, columns }) => {
-  const saveDesks = (bookedDesks: Desk) => {
-    console.log(bookedDesks);
-  };
+const BookFloorGrid: FC<BookFloorGridProps> = ({
+  desks,
+  rows,
+  columns,
+  saveDesk,
+}) => {
+  const [reservedId, setReservedId] = useState(0);
   const renderColumns = (row: number, columns: number, desks: Desk[]) => {
     let columnComponents: any = [];
     for (let i = 0; i < columns; i++) {
       if (desks?.length > 0) {
         const desk = desks[row * columns + i];
-        console.log(row, columns, i);
-        console.log(row * columns + i);
+
         columnComponents.push(
           <Col key={i} xs="auto">
-            <Item key={i} desk={desk} />
+            <Item
+              key={i}
+              desk={desk}
+              onClick={() => {
+                if (reservedId === desk.id) {
+                  setReservedId(0);
+                  saveDesk(0);
+                } else {
+                  setReservedId(desk.id);
+                  saveDesk(desk.id);
+                }
+              }}
+              isRes={reservedId === desk.id}
+            />
           </Col>
         );
       }

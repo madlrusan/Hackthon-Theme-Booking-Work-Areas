@@ -7,7 +7,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "../../api/axios";
 import { LocationContext } from "../../context/LocationProvider";
 import BookFloorGrid from "../common/floorGrid.tsx/bookFloorGrid";
@@ -20,25 +20,37 @@ const LocationPage = () => {
   const [selectedFloor, setSelectedFloor] = useState(
     selectedLocation.floors[0]
   );
-  const getLocation = async () => {
+  const navigate = useNavigate();
+  const [reservedDays, setReservedDays] = useState(0);
+  const [selectedDeskId, setSelectedDeskId] = useState(0);
+  const onSubmit = async (e) => {
+    e.preventDefault();
     try {
-      return await axios.get(`${ApiUrls.GET_FLOORBYID}${selectedFloor.id}`);
+      await axios.post(
+        ApiUrls.RESERVATION,
+        JSON.stringify({ deskId: selectedDeskId, numberOfDays: reservedDays })
+      );
+      navigate("/");
+    } catch (err) {}
+  };
+  const getLocation = async (floorID: number) => {
+    try {
+      return await axios.get(`${ApiUrls.GET_FLOORBYID}${floorID}`);
     } catch (err) {
       console.error(err);
     }
   };
-  const onFloorClick = async () => {
-    getLocation().then((r) => {
-      console.log(r);
+  const onFloorClick = async (floorID: number) => {
+    getLocation(floorID).then((r) => {
+      setSelectedFloor(r?.data);
     });
     // setSelectedFloor(floor);
   };
 
   useEffect(() => {
-    getLocation().then((r) => {
+    getLocation(selectedFloor.id).then((r) => {
       setSelectedFloor(r?.data);
     });
-    // setSelectedFloor(response);
   }, []);
   // const filter = (e: any) => {
   //   const keyword = e.target.value;
@@ -61,21 +73,37 @@ const LocationPage = () => {
             {/* we need search bar and filter buttons */}
             <List>
               {selectedLocation.floors.map((floor) => (
-                <ListItem key={floor.id}>
+                <ListItem key={floor.id} onClick={() => onFloorClick(floor.id)}>
                   <ListItemButton>
-                    <ListItemText onClick={() => onFloorClick()}>
-                      {floor.name}
-                    </ListItemText>
+                    <ListItemText>{floor.name}</ListItemText>
                   </ListItemButton>
                 </ListItem>
               ))}
             </List>
           </div>
+          <form>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <label htmlFor="daysNr">How many days you want to book?</label>
+              <input
+                id="daysNr"
+                type="number"
+                onChange={(e) => setReservedDays(parseInt(e.target.value))}
+              />
+            </div>
+            <button
+              style={{ marginTop: "20px" }}
+              disabled={selectedDeskId === 0}
+              onClick={(e) => onSubmit(e)}
+            >
+              Book desk
+            </button>
+          </form>
         </div>
         <BookFloorGrid
           rows={selectedFloor.rows}
           columns={selectedFloor.columns}
           desks={selectedFloor.desks}
+          saveDesk={(id: number) => setSelectedDeskId(id)}
         />
       </Card>
     </div>
